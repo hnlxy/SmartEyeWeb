@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/purpleAdmin.iml" filepath="$PROJECT_DIR$/.idea/purpleAdmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SmartEyeWeb.iml" filepath="$PROJECT_DIR$/.idea/SmartEyeWeb.iml" />
     </modules>
   </component>
 </project>
