@@ -1,2 +1,95 @@
-{% extends 'base.html' %}
-{% block title %}成员列表{% endblock title %}
+{%extends "base.html" %}
+{%block title%}长者中心{%endblock title%}
+{%block content%}
+<style>
+.pagination-container {
+  display: flex;
+  justify-content: flex-end; /* 使分页控件靠右对齐 */
+  margin-top: 10px; /* 在表格和分页控件之间添加一些间隔 */
+}
+.table{
+    background-color: #f7f8fd;
+    color: #808080; /* 设置字体颜色为浅灰色 */
+}
+
+.container{
+  width: 100%;
+        margin: 10px auto;
+        background-color: #f7f8fd;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+}
+.table  thead{
+  color: #A9A9A9;
+}
+</style>
+
+<div class="content-wrapper">
+    <div style="font-size: 25px; margin-bottom: 15px">长者中心</div>
+    <div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+        <table class="table">
+          <thead>
+
+            <tr>
+              <th>
+                <input type="checkbox" id="checkAll"> <!-- 添加全选勾选框 -->
+              </th>
+              <th>ID</th>
+              <th>长者姓名</th>
+              <th>入住日期</th>
+              <th>分配护工</th>
+              <th>护理级别</th>
+              <th>健康状况</th>
+              <th>房间号</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for result in  results%}
+              <tr><!--保证每条记录换行-->
+                <td>
+                  <input type="checkbox" class="checkItem"> <!-- 在每行添加勾选框 -->
+                </td>
+              <td>{{ result[0] }}</td>
+              <td>{{ result[1] }}</td>
+              <td>{{ result[2] }}</td>
+              <td>{{ result[3] }}</td>
+              <td>{{ result[4] }}</td>
+              <td style="color: {% if result[5] == '健康' %}green{% elif result[5] == '恢复' %}skyblue{% elif result[5] == '病危' %}Tomato{% endif %};">
+                {{ result[5] }}
+                </td>
+              <td>{{ result[6] }}</td>
+            </tr>
+              {% endfor %}
+
+          </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    <!-- 分页控件的 HTML 结构 -->
+    <div class="pagination-container">
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-end">
+    <li class="page-item">
+      <a class="page-link" href="#">上一页</a>
+    </li>
+
+    <!-- 示例页数 -->
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <!-- ... -->
+
+    <li class="page-item">
+      <a class="page-link" href="#">下一页</a>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+<script src="{{ url_for('static', filename='assets/js/TableCheckboxController.js') }}"></script>
+
+{% endblock content %}
