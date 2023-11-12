@@ -1,2 +1,195 @@
 {% extends 'base.html' %}
 {% block title %}添加护工{% endblock title %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Microsoft YaHei', Arial, sans-serif;
+        background-color: #f1f3fd;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        background-color: #f7f8fd;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .file-input {
+        display: inline-block;
+        width: 48%;
+        border: dashed 2px #ccc;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    .file-input p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    input[type="file"] {
+        border: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .file-input:hover {
+        background-color: #f9f9f9;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: #5cb85c;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .submit-btn:hover {
+        background-color: #4cae4c;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .form-field {
+        flex-basis: 33%;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 120px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    .file-input label {
+        display: block;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .file-input label:hover {
+        background-color: #0056b3;
+    }
+
+    .file-input input[type="file"] {
+        display: none;
+    }
+    .form-field input, .form-field select, .form-field textarea{
+        border-radius: 10px;
+    }
+
+</style>
+<div class="container">
+        <div style="font-size: 25px; margin-bottom: 15px">添加护工</div>
+        <div class="form-group">
+            <div class="file-input">
+                <label for="profile_picture">头像照</label>
+                <p>点击此处上传图片</p>
+                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+                <p>最大图片大小 2MB</p>
+            </div>
+            <div class="file-input" style="float: right;">
+                <label for="cover_picture">资质证明</label>
+                <p>点击此处上传图片</p>
+                <input type="file" id="cover_picture" name="cover_picture" accept="image/*">
+                <p>最大图片大小 2MB</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="full_name">护工名字</label>
+                <input type="text" id="full_name" name="full_name" placeholder="护工名字">
+            </div>
+            <div class="form-field">
+                <label for="id_number">电话号码</label>
+                <input type="text" id="id_number" name="id_number" placeholder="电话号码">
+            </div>
+            <div class="form-field">
+                <label for="address">地址</label>
+                <input type="text" id="address" name="address" placeholder="地址">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="age">年龄</label>
+                <input type="number" id="age" name="age" placeholder="年龄">
+            </div>
+            <div class="form-field">
+                <label for="gender">性别</label>
+                <select id="gender" name="gender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="department">选择部门</label>
+                <select id="department" name="department">
+                    <option value="1">护工</option>
+                    <option value="2">护士</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="email">邮箱</label>
+                <input type="text" id="email" name="email" placeholder="example@example.com">
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label for="experience">经历</label>
+                <textarea id="experience" name="experience" placeholder=""></textarea>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <button class="submit-btn">添加</button>
+    </div>
+{% endblock content %}
