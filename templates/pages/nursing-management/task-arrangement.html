@@ -29,7 +29,7 @@
         font-size: 20px;
     }
 
-    #prevMonth, #nextMonth {
+    #prevWeek, #nextWeek {
         background: none;
         border: 1px solid transparent;
         padding: 5px 10px;
@@ -50,27 +50,35 @@
         font-size: 15px;
         margin-right: 20px;
     }
+    #add_task{
+        float: right;
+        font-size: 15px;
+        margin-right: 20px;
+        background-color: #50FA7B;
+        border-radius: 10px;
+        border: none;
+    }
 
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const prevMonthBtn = document.getElementById('prevMonth');
-        const nextMonthBtn = document.getElementById('nextMonth');
+        const prevWeekBtn = document.getElementById('prevWeek');
+        const nextWeekBtn = document.getElementById('nextWeek');
         const monthYearSpan = document.getElementById('monthYear');
 
         let currentDate = new Date();
 
         function updateMonthYear() {
-            monthYearSpan.textContent = currentDate.toLocaleDateString('zh-cn', {month: 'long', year: 'numeric'});
+            monthYearSpan.textContent = currentDate.toLocaleDateString('zh-cn', {month: 'long', year: 'numeric', day: 'numeric'});
         }
 
-        prevMonthBtn.addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
+        prevWeekBtn.addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 7);
             updateMonthYear();
         });
 
-        nextMonthBtn.addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
+        nextWeekBtn.addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 7);
             updateMonthYear();
         });
         updateMonthYear();
@@ -80,14 +88,15 @@
 <div class="content-wrapper">
     <div style="display:flex; margin-bottom: 15px">
         <div style="font-size: 25px">任务安排</div>
-        <button id="prevMonth">&lt;</button>
+        <button id="prevWeek">&lt;</button>
         <span id="monthYear"></span>
-        <button id="nextMonth">&gt;</button>
+        <button id="nextWeek">&gt;</button>
         <select id="name" style="width: 100px">
             <option>张三</option>
             <option>李四</option>
             <option>王五</option>
         </select>
+        <button id="add_task">添加任务</button>
     </div>
     <table id="task">
         <thead>
@@ -119,4 +128,4 @@
         });
     </script>
 </div>
-{% endblock %}
+{% endblock content%}

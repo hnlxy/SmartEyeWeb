@@ -1,5 +1,5 @@
 from flask import Flask
-
+from os import urandom
 import settings
 from blueprints.user import user_bp
 from blueprints.elderly import elderly_bp
@@ -25,6 +25,7 @@ def create_app():
     app.register_blueprint(system_report_bp)
     app.register_blueprint(account_bp)
     app.register_blueprint(setting_bp)
+    app.secret_key = urandom(66)
     # TODO 初始化配置
     # db.init_app(app)
 

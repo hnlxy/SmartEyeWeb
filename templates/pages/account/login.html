@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <style type="text/css">
+    <meta charset="UTF-8">
+    <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #f4f4f4;
@@ -15,17 +16,22 @@
 
         .main-container {
             display: flex;
-            width: 80%;
-            max-width: 1200px;
+            width: 95%;
+            height: 95%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
         }
 
         .login-container {
-            flex: 1;
+            flex: 0.5;
             padding: 20px;
             background-color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .image-container {
@@ -37,13 +43,21 @@
 
         .input-group {
             margin-bottom: 20px;
+            display: flex;
+            width: 100%;
         }
-
+        .input-group label{
+            font-size: 30px;
+            text-align: center;
+            white-space: nowrap;
+            margin-right: 20px;
+        }
         .input-group input {
-            width: calc(100% - 20px);
+            width: 100%;
             padding: 10px;
             border: 1px solid #cccccc;
-            border-radius: 4px;
+            border-radius: 10px;
+            flex-grow: 1;
         }
 
         .input-group input:focus {
@@ -77,34 +91,56 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>智眼守护</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function login(){
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            $.ajax({
+                url: "/login",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
+                success: function (response) {
+                    if (response.success === undefined || response.success) {
+                        window.location.href = "/index/" + username;
+                    } else {
+                        alert(response.message);
+                        document.getElementById("username").value = "";
+                        document.getElementById("password").value = "";
+                    }
+                },
+                error: function (){
+                    alert('请求失败');
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="main-container">
         <div class="login-container">
-            <h2>欢迎来到SmartEye</h2>
-            <form action="/login" method="post">
+            <h2 style="font-size: 30px">欢迎来到SmartEye</h2>
                 <div class="input-group">
-                    <input type="email" id="email" name="email" placeholder="邮箱" required>
+                    <label for="username">邮箱</label>
+                    <input type="text" id="username" name="username" placeholder="用户名" required>
                 </div>
                 <div class="input-group">
+                    <label for="password">密码</label>
                     <input type="password" id="password" name="password" placeholder="密码" required>
                 </div>
-                <button type="submit">登录</button>
-                <button type="button" onclick="resetPassword()">重新设置密码</button>
+                <button onclick="login()" style="font-size: 15px">登录</button>
                 <div class="signup">
-                    还没有账户？<a href="register.html">立即注册</a>
+                    还没有账户？<a href="/register">立即注册</a>
                 </div>
-            </form>
         </div>
         <div class="image-container">
             <!-- Image will be shown here, set via CSS -->
         </div>
     </div>
-    <script>
-        function resetPassword() {
-            // Implement reset password functionality
-        }
-    </script>
 </body>
 </html>
