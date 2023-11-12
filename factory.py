@@ -10,14 +10,14 @@ from blueprints.permission import permission_bp
 
 def create_app():
     app = Flask(__name__)
-    # TODO ¼ÓÔØÅäÖÃ
+    # TODO åŠ è½½é…ç½®
     app.config.from_object(settings.DevelopmentConfig)
-    # TODO ×¢²áÀ¶±¾
+    # TODO æ³¨å†Œè“æœ¬
     app.register_blueprint(user_bp)
     app.register_blueprint(elderly_bp)
     app.register_blueprint(nurse_bp)
     app.register_blueprint(permission_bp)
-    # TODO ³õÊ¼»¯ÅäÖÃ
+    # TODO åˆå§‹åŒ–é…ç½®
     # db.init_app(app)
 
     return app
