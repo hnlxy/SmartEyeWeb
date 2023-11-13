@@ -8,7 +8,7 @@ from extensions import User
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return render_template('/pages/account/login.html')
+        return render_template('pages/account/login.html')
     else:
         data = request.get_json()
         username = data['username']
@@ -16,7 +16,7 @@ def login():
         if username == 'smarteye' and password == '123456':
             user = User(username)
             login_user(user)
-            return redirect(f'/index')
+            # return redirect('/index')
+            return render_template('index.html', username=username)
         else:
             return jsonify({'success': False, 'message': '用户名或密码错误'}), 200, {'ContentType': 'application/json'}
-
