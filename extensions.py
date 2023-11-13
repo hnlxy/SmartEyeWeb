@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user, logout_user, login_required, current_user, LoginManager, UserMixin
-
+from factory import app
 
 class User(UserMixin):
     def __init__(self, username):
@@ -16,5 +16,4 @@ def load_user(user):
     return User(user)
 
 
-# 扩展类实例化
-db = SQLAlchemy()
+db = SQLAlchemy(app)
