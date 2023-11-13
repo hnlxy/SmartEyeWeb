@@ -107,7 +107,7 @@
                 }),
                 success: function (response) {
                     if (response.success === undefined || response.success) {
-                        window.location.href = "/index/" + username;
+                        window.location.href = "/index";
                     } else {
                         alert(response.message);
                         document.getElementById("username").value = "";
@@ -126,7 +126,7 @@
         <div class="login-container">
             <h2 style="font-size: 30px">欢迎来到SmartEye</h2>
                 <div class="input-group">
-                    <label for="username">邮箱</label>
+                    <label for="username">用户名</label>
                     <input type="text" id="username" name="username" placeholder="用户名" required>
                 </div>
                 <div class="input-group">

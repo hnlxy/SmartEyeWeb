@@ -1,6 +1,7 @@
 from blueprints.user import user_bp
 from flask import request, render_template, redirect, session, url_for, jsonify
-import json
+from flask_login import login_user, logout_user, login_required, current_user, LoginManager, UserMixin
+from extensions import User
 
 
 @user_bp.route('/', methods=['GET'])
@@ -13,8 +14,9 @@ def login():
         username = data['username']
         password = data['password']
         if username == 'smarteye' and password == '123456':
-            session[username] = username
-            return redirect(f'/index/{username}')
+            user = User(username)
+            login_user(user)
+            return redirect(f'/index')
         else:
             return jsonify({'success': False, 'message': '用户名或密码错误'}), 200, {'ContentType': 'application/json'}
 

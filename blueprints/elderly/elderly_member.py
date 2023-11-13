@@ -1,8 +1,10 @@
 from . import elderly_bp
 from flask import Flask, render_template
+from flask_login import login_required
 
 
 @elderly_bp.route('/pages/elderly-management/elderly-member')
+@login_required
 def elderly_member():
     results = [
         ("#A-122014","张三","26 Jan 2021","casdasd","三级","病危","614"),
