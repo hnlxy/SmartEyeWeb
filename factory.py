@@ -1,5 +1,6 @@
 from flask import Flask
 from os import urandom
+from extensions import init_app
 import settings
 from blueprints.user import user_bp
 from blueprints.elderly import elderly_bp
@@ -18,6 +19,7 @@ def create_app():
     # TODO 加载配置
     app.config.from_object(settings.DevelopmentConfig)
     login_manager.init_app(app)
+    init_app(app)
     # TODO 注册蓝本
     app.register_blueprint(user_bp)
     app.register_blueprint(elderly_bp)
