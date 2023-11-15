@@ -21,9 +21,9 @@ class Announcement(db.Model):
 #护工表    
 class Caregiver(db.Model):
     __tablename__ = 'caregivers'
-    id = Column('护工编号', String(255), primary_key=True)
+    id = Column('护工ID', String(255), primary_key=True)
     name = Column('姓名', String(30), nullable=False)   
-    phone_number = Column('电话号码', String(11), nullable=False)#
+    phone_number = Column('联系电话', String(11), nullable=False)#
     address = Column('地址', String(255), nullable=False)
     birth = Column('出生年月', datetime, nullable=False)
     enter_date = Column('录用日期',datetime, nullable=False)
@@ -62,7 +62,7 @@ class MonthlyInfo(db.Model):
 #用户表
 class User(db.Model):
     __tablename__ = 'users'
-    id = Column('用户名', String(255), primary_key=True)
+    id = Column('用户ID', String(255), primary_key=True)
     guardian_id = Column('监护人ID', String(255),foreign_key=(Guardian.id))
     account_status = Column('账户状态', Boolean, nullable=False)
     username = Column('用户名', String(20), nullable=False)
@@ -80,7 +80,7 @@ class Elder(db.Model):
     gender = Column('性别', Enum('男', '女'), nullable=False)
     phone_number = Column('电话号码', String(11), nullable=False)
     home_address = Column('家庭住址', String)
-    admission_date = Column('入住日期', String)
+    admission_date = Column('入住日期', datetime)
     assigned_caregiver = Column('分配护工', String)
     care_level = Column('护理级别', Enum('一级', '二级', '三级'), nullable=False)
     room_number = Column('房间号', String)
@@ -89,16 +89,14 @@ class Elder(db.Model):
 class ElderExpense(db.Model):
     __tablename__ = 'elder_expenses'
     elder_id = Column('长者ID', String, foreign_key=(Elder.id))
-    elder_name = Column('长者姓名', String)
     deposit = Column('押金(元)', Integer)
     payment_record = Column('缴费记录(元)', Integer)
-    payment_date = Column('缴费时间', String)
+    payment_date = Column('缴费时间', datetime)
 
 #长者健康表
 class ElderHealth(db.Model):
     __tablename__ = 'elder_health'
     elder_id = Column('长者ID', Integer, foreign_key=(Elder.id))
-    elder_name = Column('长者姓名', String)
     blood_pressure = Column('血压(收缩压kpa/舒张压kpa)', String)
     blood_oxygen = Column('血氧(%)', Double)
     blood_sugar = Column('血糖(空腹mmol/L/餐后mmol/L)', Double)
