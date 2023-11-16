@@ -1,4 +1,6 @@
-CREATE TABLE `MonthlyInfo`(
+-- CREATE DATABASE smart_eye;
+USE smart_eye;
+CREATE TABLE `monthly_info`(
     `日期` DATETIME NOT NULL,
     `住院人数` INT NOT NULL,
     `护工人数` INT NOT NULL,
@@ -7,8 +9,8 @@ CREATE TABLE `MonthlyInfo`(
     `支出` INT NOT NULL
 );
 ALTER TABLE
-    `MonthlyInfo` ADD PRIMARY KEY(`日期`);
-CREATE TABLE `Users`(
+    monthly_info ADD PRIMARY KEY(`日期`);
+CREATE TABLE `users`(
     `用户ID` VARCHAR(255) NOT NULL,
     `监护人ID` VARCHAR(255) NOT NULL,
     `账户状态` TINYINT(1) NOT NULL,
@@ -20,8 +22,8 @@ CREATE TABLE `Users`(
     `邮箱` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `Users` ADD PRIMARY KEY(`用户ID`);
-CREATE TABLE `ElderExpense`(
+    `users` ADD PRIMARY KEY(`用户ID`);
+CREATE TABLE `elder_expense`(
     `长者ID` VARCHAR(255) NOT NULL,
     `长者姓名` VARCHAR(255) NOT NULL,
     `押金（元）` INT NOT NULL,
@@ -29,8 +31,8 @@ CREATE TABLE `ElderExpense`(
     `缴费时间` DATETIME NOT NULL
 );
 ALTER TABLE
-    `ElderExpense` ADD PRIMARY KEY(`长者ID`);
-CREATE TABLE `Guardians`(
+    elder_expense ADD PRIMARY KEY(`长者ID`);
+CREATE TABLE `guardians`(
     `监护人ID` VARCHAR(255) NOT NULL,
     `监护人姓名` VARCHAR(255) NOT NULL,
     `电话号码` VARCHAR(255) NOT NULL,
@@ -40,8 +42,8 @@ CREATE TABLE `Guardians`(
     `备注` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `Guardians` ADD PRIMARY KEY(`监护人ID`);
-CREATE TABLE `Elders`(
+    `guardians` ADD PRIMARY KEY(`监护人ID`);
+CREATE TABLE `elders`(
     `长者ID` VARCHAR(255) NOT NULL,
     `长者姓名` VARCHAR(255) NOT NULL,
     `性别` ENUM('') NOT NULL,
@@ -53,22 +55,20 @@ CREATE TABLE `Elders`(
     `房间号` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `Elders` ADD PRIMARY KEY(`长者ID`);
-CREATE TABLE `Announcements`(
+    `elders` ADD PRIMARY KEY(`长者ID`);
+CREATE TABLE `announcements`(
     `公告id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `标题` VARCHAR(255) NOT NULL,
     `正文` VARCHAR(255) NOT NULL,
     `发布时间` DATETIME NOT NULL
 );
-CREATE TABLE `ElderGuardian`(
+CREATE TABLE `elder_guardian`(
     `监护人id` VARCHAR(255) NOT NULL,
     `长者id` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `ElderGuardian` ADD PRIMARY KEY(`监护人id`);
-ALTER TABLE
-    `ElderGuardian` ADD PRIMARY KEY(`长者id`);
-CREATE TABLE `Caregivers`(
+    elder_guardian ADD PRIMARY KEY(`监护人id`, `长者id`);
+CREATE TABLE `caregivers`(
     `护工ID` VARCHAR(255) NOT NULL,
     `姓名` VARCHAR(255) NOT NULL,
     `联系电话` VARCHAR(255) NOT NULL,
@@ -83,9 +83,9 @@ CREATE TABLE `Caregivers`(
     `资格照` BINARY(16) NOT NULL
 );
 ALTER TABLE
-    `Caregivers` ADD PRIMARY KEY(`护工ID`);
-CREATE TABLE `ElderHealth`(
-    `长者ID` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `caregivers` ADD PRIMARY KEY(`护工ID`);
+CREATE TABLE `elder_health`(
+    `长者ID` VARCHAR(255) NOT NULL PRIMARY KEY,
     `血压(收缩压kpa/舒张压kpa)` DOUBLE NOT NULL,
     `血氧(%)` DOUBLE NOT NULL,
     `血糖(空腹mmol/L/餐后mmol/L)` DOUBLE NOT NULL,
@@ -93,12 +93,13 @@ CREATE TABLE `ElderHealth`(
     `饮水量(mL)` DOUBLE NOT NULL
 );
 ALTER TABLE
-    `Users` ADD CONSTRAINT `users_监护人id_foreign` FOREIGN KEY(`监护人ID`) REFERENCES `Guardians`(`监护人ID`);
+    `users` ADD CONSTRAINT `users_guardians_id_foreign` FOREIGN KEY(`监护人ID`) REFERENCES `guardians`(`监护人ID`);
 ALTER TABLE
-    `ElderGuardian` ADD CONSTRAINT `elderguardian_长者id_foreign` FOREIGN KEY(`长者id`) REFERENCES `Elders`(`长者ID`);
+    elder_guardian ADD CONSTRAINT `elder_guardian_elders_id_foreign` FOREIGN KEY(`长者id`) REFERENCES `elders`(`长者ID`);
 ALTER TABLE
-    `Elders` ADD CONSTRAINT `elders_长者id_foreign` FOREIGN KEY(`长者ID`) REFERENCES `ElderExpense`(`长者ID`);
+    `elders` ADD CONSTRAINT `elders_elder_expense_id_foreign` FOREIGN KEY(`长者ID`) REFERENCES elder_expense(`长者ID`);
 ALTER TABLE
-    `Elders` ADD CONSTRAINT `elders_长者id_foreign` FOREIGN KEY(`长者ID`) REFERENCES `ElderHealth`(`长者ID`);
+    `elders`
+    ADD CONSTRAINT `elders_elder_health_id_foreign` FOREIGN KEY(`长者ID`) REFERENCES elder_health(`长者ID`);
 ALTER TABLE
-    `Elders` ADD CONSTRAINT `elders_分配护工_foreign` FOREIGN KEY(`分配护工`) REFERENCES `Caregivers`(`护工ID`);
+    `elders` ADD CONSTRAINT `elders_caregivers_foreign` FOREIGN KEY(`分配护工`) REFERENCES `caregivers`(`护工ID`);
