@@ -6,4 +6,10 @@ from flask_login import login_required
 @nurse_bp.route('/pages/nursing-management/nurse-member')
 @login_required
 def nurse_member():
-    return render_template('pages/nursing-management/nurse-member.html')
+    results = [
+        ("#A-122014", "ABCD", "35", "男", "护理部", "12345678901", "保定市莲池区"),
+        ("#A-122015", "BCDA", "54", "男", "护理部", "12345678901", "保定市莲池区"),
+        ("#A-122016", "TADS", "47", "男", "护理部", "12345678901", "保定市莲池区"),
+        ("#A-122017", "AVCD", "53", "男", "护理部", "12345678901", "保定市莲池区"),
+    ]
+    return render_template('pages/nursing-management/nurse-member.html', results=results)
