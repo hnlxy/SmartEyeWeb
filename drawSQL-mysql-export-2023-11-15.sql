@@ -1,105 +1,105 @@
 -- CREATE DATABASE smart_eye;
 USE smart_eye;
 CREATE TABLE `monthly_info`(
-    `日期` DATETIME NOT NULL,
-    `住院人数` INT NOT NULL,
-    `护工人数` INT NOT NULL,
-    `剩余床位` INT NOT NULL,
-    `收入` INT NOT NULL,
-    `支出` INT NOT NULL
+    `date` DATETIME NOT NULL,
+    `all_people` INT NOT NULL,
+    `caregivers` INT NOT NULL,
+    `rest_beds` INT NOT NULL,
+    `income` INT NOT NULL,
+    `expense` INT NOT NULL
 );
 ALTER TABLE
-    monthly_info ADD PRIMARY KEY(`日期`);
+    monthly_info ADD PRIMARY KEY(`date`);
 CREATE TABLE `users`(
-    `用户ID` VARCHAR(255) NOT NULL,
-    `监护人ID` VARCHAR(255) NOT NULL,
-    `账户状态` TINYINT(1) NOT NULL,
-    `用户名` VARCHAR(255) NOT NULL,
-    `密码` VARCHAR(255) NOT NULL,
-    `电话号码` VARCHAR(255) NOT NULL,
-    `地址` VARCHAR(255) NOT NULL,
-    `出生日期` DATETIME NOT NULL,
-    `邮箱` VARCHAR(255) NOT NULL
+    `user_id` VARCHAR(255) NOT NULL,
+    `guardians_id` VARCHAR(255) NOT NULL,
+    `user_status` VARCHAR(255) NOT NULL,
+    `user_name` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `user_phone` VARCHAR(255) NOT NULL,
+    `user_address` VARCHAR(255) NOT NULL,
+    `user_birth` DATETIME NOT NULL,
+    `user_email` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `users` ADD PRIMARY KEY(`用户ID`);
+    `users` ADD PRIMARY KEY(`user_ID`);
 CREATE TABLE `elder_expense`(
-    `长者ID` VARCHAR(255) NOT NULL,
-    `长者姓名` VARCHAR(255) NOT NULL,
-    `押金（元）` INT NOT NULL,
-    `缴费记录（元）` INT NOT NULL,
-    `缴费时间` DATETIME NOT NULL
+    `elder_id` VARCHAR(255) NOT NULL,
+    `elder_name` VARCHAR(255) NOT NULL,
+    `deposit` INT NOT NULL,
+    `payment` INT NOT NULL,
+    `pay_date` DATETIME NOT NULL
 );
 ALTER TABLE
-    elder_expense ADD PRIMARY KEY(`长者ID`);
+    elder_expense ADD PRIMARY KEY(`elder_id`);
 CREATE TABLE `guardians`(
-    `监护人ID` VARCHAR(255) NOT NULL,
-    `监护人姓名` VARCHAR(255) NOT NULL,
-    `电话号码` VARCHAR(255) NOT NULL,
-    `性别` ENUM('') NOT NULL,
-    `地址` VARCHAR(255) NOT NULL,
-    `关系` VARCHAR(255) NOT NULL,
-    `备注` VARCHAR(255) NOT NULL
+    `guardian_id` VARCHAR(255) NOT NULL,
+    `guardian_name` VARCHAR(255) NOT NULL,
+    `guardian_phone` VARCHAR(255) NOT NULL,
+    `guardian_gender` ENUM('') NOT NULL,
+    `guardian_address` VARCHAR(255) NOT NULL,
+    `relation` VARCHAR(255) NOT NULL,
+    `remark` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    `guardians` ADD PRIMARY KEY(`监护人ID`);
+    `guardians` ADD PRIMARY KEY(`guardian_id`);
 CREATE TABLE `elders`(
-    `长者ID` VARCHAR(255) NOT NULL,
-    `长者姓名` VARCHAR(255) NOT NULL,
-    `性别` ENUM('') NOT NULL,
-    `电话号码` VARCHAR(255) NOT NULL,
-    `家庭住址` VARCHAR(255) NOT NULL,
-    `入住日期` DATETIME NOT NULL,
-    `分配护工` VARCHAR(255) NOT NULL,
-    `护理级别` ENUM('') NOT NULL,
-    `房间号` VARCHAR(255) NOT NULL
-);
+    `elder_id` VARCHAR(255) NOT NULL,
+    `elder_name` VARCHAR(255) NOT NULL,
+    `elder_gender` ENUM('') NOT NULL,
+    `elder_phone` VARCHAR(255) NOT NULL,
+    `elder_address` VARCHAR(255) NOT NULL,
+    `elder_birth` DATETIME NOT NULL,
+    `assign_caregiver` VARCHAR(255) NOT NULL,
+    `level_care` ENUM('') NOT NULL,
+    `romm_num` VARCHAR(255) NOT NULL
+    );
 ALTER TABLE
-    `elders` ADD PRIMARY KEY(`长者ID`);
+    `elders` ADD PRIMARY KEY(`elder_id`);
 CREATE TABLE `announcements`(
-    `公告id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `标题` VARCHAR(255) NOT NULL,
-    `正文` VARCHAR(255) NOT NULL,
-    `发布时间` DATETIME NOT NULL
+    `annou_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(255) NOT NULL,
+    `body` VARCHAR(255) NOT NULL,
+    `date` DATETIME NOT NULL
 );
 CREATE TABLE `elder_guardian`(
-    `监护人id` VARCHAR(255) NOT NULL,
-    `长者id` VARCHAR(255) NOT NULL
+    `guardian_id` VARCHAR(255) NOT NULL,
+    `elder_id` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
-    elder_guardian ADD PRIMARY KEY(`监护人id`, `长者id`);
+    elder_guardian ADD PRIMARY KEY(`elder_id`, `guardian_id`);
 CREATE TABLE `caregivers`(
-    `护工ID` VARCHAR(255) NOT NULL,
-    `姓名` VARCHAR(255) NOT NULL,
-    `联系电话` VARCHAR(255) NOT NULL,
-    `地址` VARCHAR(255) NOT NULL,
-    `出生年月` DATETIME NOT NULL,
-    `录用日期` BIGINT NOT NULL,
-    `性别` ENUM('') NOT NULL,
-    `邮箱` VARCHAR(255) NOT NULL,
-    `部门` VARCHAR(255) NOT NULL,
-    `经历` VARCHAR(255) NOT NULL,
-    `头像照` BINARY(16) NOT NULL,
-    `资格照` BINARY(16) NOT NULL
+    `caregiver_id` VARCHAR(255) NOT NULL,
+    `caregiver_name` VARCHAR(255) NOT NULL,
+    `caregiver_phone` VARCHAR(255) NOT NULL,
+    `caregiver_address` VARCHAR(255) NOT NULL,
+    `caregiver_birth` DATETIME NOT NULL,
+    `hired_date` BIGINT NOT NULL,
+    `caregiver_gender` ENUM('') NOT NULL,
+    `caregiver_email` VARCHAR(255) NOT NULL,
+    `caregiver_department` VARCHAR(255) NOT NULL,
+    `experienced` VARCHAR(255) NOT NULL,
+    `photo` BINARY(16) NOT NULL,
+    `qualification_photo` BINARY(16) NOT NULL
 );
 ALTER TABLE
     `caregivers` ADD PRIMARY KEY(`护工ID`);
 CREATE TABLE `elder_health`(
-    `长者ID` VARCHAR(255) NOT NULL PRIMARY KEY,
-    `血压(收缩压kpa/舒张压kpa)` DOUBLE NOT NULL,
-    `血氧(%)` DOUBLE NOT NULL,
-    `血糖(空腹mmol/L/餐后mmol/L)` DOUBLE NOT NULL,
-    `心率(次/分)` INT NOT NULL,
-    `饮水量(mL)` DOUBLE NOT NULL
+    `elder_ID` VARCHAR(255) NOT NULL PRIMARY KEY,
+    `Blood_pressure` DOUBLE NOT NULL,
+    `Blood_Oxygen` DOUBLE NOT NULL,
+    `Blood_glucose` DOUBLE NOT NULL,
+    `Heart_rate` INT NOT NULL,
+    `water_intake` DOUBLE NOT NULL
 );
 ALTER TABLE
-    `users` ADD CONSTRAINT `users_guardians_id_foreign` FOREIGN KEY(`监护人ID`) REFERENCES `guardians`(`监护人ID`);
+    `users` ADD CONSTRAINT `users_guardians_id_foreign` FOREIGN KEY(`guardian_id`) REFERENCES `guardians`(`guardian_id`);
 ALTER TABLE
-    elder_guardian ADD CONSTRAINT `elder_guardian_elders_id_foreign` FOREIGN KEY(`长者id`) REFERENCES `elders`(`长者ID`);
+    elder_guardian ADD CONSTRAINT `elder_guardian_elders_id_foreign` FOREIGN KEY(`elder_id`) REFERENCES `elders`(`elder_id`);
 ALTER TABLE
-    `elders` ADD CONSTRAINT `elders_elder_expense_id_foreign` FOREIGN KEY(`长者ID`) REFERENCES elder_expense(`长者ID`);
+    `elders` ADD CONSTRAINT `elders_elder_expense_id_foreign` FOREIGN KEY(`elder_id`) REFERENCES elder_expense(`elder_id`);
 ALTER TABLE
     `elders`
-    ADD CONSTRAINT `elders_elder_health_id_foreign` FOREIGN KEY(`长者ID`) REFERENCES elder_health(`长者ID`);
+    ADD CONSTRAINT `elders_elder_health_id_foreign` FOREIGN KEY(`elder_id`) REFERENCES elder_health(`elder_id`);
 ALTER TABLE
-    `elders` ADD CONSTRAINT `elders_caregivers_foreign` FOREIGN KEY(`分配护工`) REFERENCES `caregivers`(`护工ID`);
+    `elders` ADD CONSTRAINT `elders_caregivers_foreign` FOREIGN KEY(`assign_caregiver`) REFERENCES `caregivers`(`caregiver_id`);
