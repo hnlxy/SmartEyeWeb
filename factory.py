@@ -1,6 +1,7 @@
 from flask import Flask
+from sqlalchemy import text
 from os import urandom
-from extensions import init_app
+from extensions import db
 import settings
 from blueprints.user import user_bp
 from blueprints.elderly import elderly_bp
@@ -18,8 +19,6 @@ def create_app():
 
     # TODO 加载配置
     app.config.from_object(settings.DevelopmentConfig)
-    login_manager.init_app(app)
-    init_app(app)
     # TODO 注册蓝本
     app.register_blueprint(user_bp)
     app.register_blueprint(elderly_bp)
@@ -31,6 +30,12 @@ def create_app():
     app.register_blueprint(setting_bp)
     app.secret_key = urandom(66)
     # TODO 初始化配置
-    # db.init_app(app)
+    login_manager.init_app(app)
+    db.init_app(app)
+
+    # with app.app_context():
+    #     with db.engine.connect() as conn:
+    #         rs = conn.execute(text("select * from users"))
+    #         print(rs.fetchone())
 
     return app

@@ -1,44 +1,43 @@
-# TODO ÅäÖÃ
+# TODO ï¿½ï¿½ï¿½ï¿½
 
 class BaseConfig(object):
-    # TODO »ù´¡ÅäÖÃ
-    # MySQLËùÔÚÖ÷»úÃû
+    # TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    # MySQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     HOSTNAME = "127.0.0.1"
-    # MySQL¼àÌýµÄ¶Ë¿ÚºÅ£¬Ä¬ÈÏ3306
+    # MySQLï¿½ï¿½ï¿½ï¿½ï¿½Ä¶Ë¿ÚºÅ£ï¿½Ä¬ï¿½ï¿½3306
     PORT = 3306
-    # Á¬½ÓMySQLµÄÓÃ»§Ãû
+    # ï¿½ï¿½ï¿½ï¿½MySQLï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
     USERNAME = "root"
-    # Á¬½ÓMySQLµÄÃÜÂë
-    PASSWORD = "root"
-    # MySQLÉÏ´´½¨µÄÊý¾Ý¿âÃû³Æ
+    # ï¿½ï¿½ï¿½ï¿½MySQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    PASSWORD = "lxy000000"
+    # MySQLï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
     DATABASE = "smart_eye"
-    # URLÅäÖÃ
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}"
-    # ÊÇ·ñ×·×Ù¶ÔÏóµÄÐÞ¸Ä²¢·¢ËÍÐÅºÅ
+    # URLï¿½ï¿½ï¿½ï¿½
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8"
+    # ï¿½Ç·ï¿½×·ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     debug = True
-    # ÃÜÔ¿ÉèÖÃ
+    # ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½
     serect_key = "SmartEye"
-    pass
 
 
 class DevelopmentConfig(BaseConfig):
-    # TODO ¿ª·¢»·¾³ÅäÖÃ
+    # TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     debug = True
     serect_key = "SmartEye"
-    SQLALCHEMY_ECHO = True  # ÏÔÊ¾ÏêÏ¸µÄ SQL ²éÑ¯ÈÕÖ¾
+    SQLALCHEMY_ECHO = True  # ï¿½ï¿½Ê¾ï¿½ï¿½Ï¸ï¿½ï¿½ SQL ï¿½ï¿½Ñ¯ï¿½ï¿½Ö¾
     pass
 
 
 class TestConfig(BaseConfig):
-    # TODO ²âÊÔ»·¾³ÅäÖÃ
+    # TODO ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://test_user:test_password@localhost/test_database"
     pass
 
 
 class ProductionConfig(BaseConfig):
-    # TODO Éú²ú»·¾³ÅäÖÃ
+    # TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     DEBUG = False
-    SQLALCHEMY_POOL_RECYCLE = 280  # ÉèÖÃ SQLAlchemy µÄÁ¬½Ó»ØÊÕÊ±¼ä
-    # ¿ÉÒÔ¿¼ÂÇÌí¼Ó¸ü¶àµÄ°²È«´ëÊ©£¬±ÈÈç HTTPS ÅäÖÃµÈ
+    SQLALCHEMY_POOL_RECYCLE = 280  # ï¿½ï¿½ï¿½ï¿½ SQLAlchemy ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    # ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Ä°ï¿½È«ï¿½ï¿½Ê©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HTTPS ï¿½ï¿½ï¿½Ãµï¿½
