@@ -2,9 +2,12 @@ from flask import render_template, Flask, session, redirect, request, jsonify
 from factory import create_app
 from flask_login import LoginManager, login_required
 
+from settings import DevelopmentConfig
+
 app = create_app()
 
 
+@app.route('/')
 @app.route('/index')
 @login_required
 def index():
@@ -12,4 +15,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    config = DevelopmentConfig
+    app.run(debug=config.debug)

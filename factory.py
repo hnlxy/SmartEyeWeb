@@ -9,7 +9,6 @@ from blueprints.nurse import nurse_bp
 from blueprints.permission import permission_bp
 from blueprints.cost import cost_bp
 from blueprints.system_report import system_report_bp
-from blueprints.account import account_bp
 from blueprints.system_setting import setting_bp
 from extensions import login_manager
 
@@ -21,13 +20,12 @@ def create_app():
     app.config.from_object(settings.DevelopmentConfig)
     # TODO 注册蓝本
     app.register_blueprint(user_bp)
-    app.register_blueprint(elderly_bp)
-    app.register_blueprint(nurse_bp)
-    app.register_blueprint(permission_bp)
-    app.register_blueprint(cost_bp)
-    app.register_blueprint(system_report_bp)
-    app.register_blueprint(account_bp)
-    app.register_blueprint(setting_bp)
+    app.register_blueprint(elderly_bp, url_prefix="/pages/elderly-management")
+    app.register_blueprint(nurse_bp, url_prefix="/pages/nursing-management")
+    app.register_blueprint(permission_bp, url_prefix="/pages/permission-management")
+    app.register_blueprint(cost_bp, url_prefix="/pages/cost-management")
+    app.register_blueprint(system_report_bp, url_prefix="/pages/system-report")
+    app.register_blueprint(setting_bp, url_prefix="/pages/system-setting")
     app.secret_key = urandom(66)
     # TODO 初始化配置
     login_manager.init_app(app)

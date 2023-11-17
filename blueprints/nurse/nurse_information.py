@@ -6,4 +6,4 @@ from flask_login import login_required
 @nurse_bp.route('/pages/nursing-management/nurse-information')
 @login_required
 def nurse_information():
-    return render_template('pages/nursing-management/nurse-information.html')
+    return render_template('pages/nurse-management/nurse_information.html')
