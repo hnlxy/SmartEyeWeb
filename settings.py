@@ -13,12 +13,11 @@ class BaseConfig(object):
     # MySQL�ϴ��������ݿ�����
     DATABASE = "smart_eye"
     # URL����
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8?charset=utf8"
     # �Ƿ�׷�ٶ�����޸Ĳ������ź�
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     debug = True
     # ��Կ����
-    serect_key = "SmartEye"
 
 
 class DevelopmentConfig(BaseConfig):

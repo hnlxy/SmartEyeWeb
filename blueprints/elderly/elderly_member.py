@@ -3,7 +3,7 @@ from flask import Flask, render_template
 from flask_login import login_required
 
 
-@elderly_bp.route('/pages/elderly-management/elderly-member')
+@elderly_bp.route('/elderly-member')
 @login_required
 def elderly_member():
     results = [
@@ -12,4 +12,4 @@ def elderly_member():
         ("#A-122016","王五","28 Jan 2021","噶啥的","一级","恢复","782"),
         ("#A-122017","李六","28 Jan 2021","佛山市","十级","病危","614"),
     ]
-    return render_template('pages/elderly-management/elderly-member.html', results=results)
+    return render_template('pages/elderly-management/elderly_member.html', results=results)

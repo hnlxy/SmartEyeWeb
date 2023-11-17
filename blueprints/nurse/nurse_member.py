@@ -12,4 +12,4 @@ def nurse_member():
         ("#A-122016", "TADS", "47", "男", "护理部", "12345678901", "保定市莲池区"),
         ("#A-122017", "AVCD", "53", "男", "护理部", "12345678901", "保定市莲池区"),
     ]
-    return render_template('pages/nursing-management/nurse-member.html', results=results)
+    return render_template('pages/nurse-management/nurse_member.html', results=results)
