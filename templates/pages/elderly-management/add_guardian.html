@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}添加长者{% endblock title %}
+{% block title %}添加监护人{% endblock title %}
 {% block content %}
 <style>
     body {
@@ -126,8 +126,8 @@
     <div style="font-size: 25px; margin-bottom: 15px">添加长者</div>
 <div class="card">
     <div class="card-body">
-        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626" href="add-elderly" >长者信息</a>
-        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626;text-decoration: none" href="add_guardian" >监护人信息</a>
+        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626;text-decoration: none" href="add-elderly" >长者信息</a>
+        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626" href="add_guardian" >监护人信息</a>
         <div class="form-group">
             <div class="file-input">
                 <label for="profile_picture"><i class="fas fa-pencil-alt"></i></label>
@@ -136,7 +136,7 @@
         </div>
         <div class="row">
             <div class="form-field">
-                <label for="full_name">长者名字</label>
+                <label for="full_name">监护人名字</label>
                 <input type="text" id="full_name" name="full_name" placeholder="长者名字" required>
             </div>
             <div class="form-field">
@@ -161,26 +161,13 @@
                 </select>
             </div>
             <div class="form-field">
-                <label for="care_level">护理级别</label>
-                <select id="care_level" name="care_level">
-                    <option value="1">一级</option>
-                    <option value="2">二级</option>
-                    <option value="3">三级</option>
+                <label for="relation">关系</label>
+                <select id="relation" name="relation">
+                    <option value="father_son">父子</option>
+                    <option value="father_daugther">父女</option>
+                    <option value="mother_daugther">母女</option>
+                    <option value="mother_daugther">母女</option>
                 </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-field">
-                <label for="elder_birth">出生日期</label>
-                <input type="text" id="elder_birth" name="elder_birth" placeholder="xxxx/xx/xx">
-            </div>
-            <div class="form-field" style="flex: content">
-                <label for="assign_caregiver">分配护工</label>
-                <input type="text" id="assign_caregiver" name="assign_caregiver" placeholder="护工ID">
-            </div>
-            <div class="form-field" style="flex: content">
-                <label for="room_num">房间号</label>
-                <input type="text" id="room_num" name="room_num" placeholder="房间号">
             </div>
         </div>
         <div class="row">
@@ -190,7 +177,7 @@
             </div>
         </div>
         <div style="clear: both;"></div>
-        <button class="submit-btn" onclick="window.location.href='add_guardian'">下一步</button>
+        <button class="submit-btn">添加</button>
     </div>
 </div>
 </div>
