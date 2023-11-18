@@ -1,2 +1,351 @@
 {% extends 'base.html' %}
 {% block title %}护工信息{% endblock title %}
+{% block content %}
+<style>
+    .content {
+        height: 75%;
+        display: flex;
+    }
+
+    .introduction {
+        width: 70%;
+        height: 100%;
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nurse {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .name {
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .picture img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 20px 20px 20px 20%;
+    }
+
+    .tabs {
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .tabs button {
+        background-color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    .tabs button:hover {
+        background-color: #ddd;
+    }
+
+    .tabs button.active {
+        border-bottom: 3px solid #FF8F6B;
+    }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        flex-grow: 1;
+        border-radius: 0 0 20px 20px;
+        overflow-y: auto;
+        font-size: 20px;
+    }
+
+    .time-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        margin-top: 20px;
+    }
+
+    .fa-clock-o {
+        margin-right: 5px;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .nav-button {
+        cursor: pointer;
+        color: #333;
+        user-select: none;
+    }
+
+    .care-elderly {
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        width: 20%;
+        height: 100%;
+        margin-left: 6%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+        background-color: #ff7b72;
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin: 20px 0;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .button:hover {
+        background-color: #ff5745;
+    }
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    .carousel-window {
+        overflow: hidden;
+        align-items: center;
+        width: 100%;
+    }
+
+    .carousel-controls button {
+        cursor: pointer;
+        padding: 16px;
+        border: none;
+        background-color: transparent;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 100;
+    }
+
+    .carousel-controls button:first-child {
+        left: 0;
+    }
+
+    .carousel-controls button:last-child {
+        right: 0;
+    }
+
+    .carousel-slides {
+        display: flex;
+        align-items: center;
+    }
+
+    .slide {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .slide-nurse {
+        display: flex;
+        border-radius: 20px;
+        background-color: white;
+        margin-left: 10%;
+        margin-right: 10%
+    }
+</style>
+<script>
+    // 页面加载时调用此函数
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        // 隐藏所有标签的内容
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // 移除所有标签的"active"类
+        tablinks = document.getElementsByClassName("tab");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        // 显示当前标签的内容，并添加"active"类
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // 在文档加载后默认打开第一个标签
+    document.addEventListener("DOMContentLoaded", function () {
+        // 手动触发经历标签的点击事件
+        document.getElementById("defaultOpen").click();
+    });
+
+</script>
+<script>
+    const loanTypes = [
+        {name: '王奶奶', room: '201'},
+        {name: '刘奶奶', room: '202'},
+        {name: '李奶奶', room: '203'},
+        {name: '陈奶奶', room: '204'},
+        {name: '张奶奶', room: '205'},
+        {name: '赵奶奶', room: '206'},
+        {name: '孙奶奶', room: '207'},
+        {name: '周奶奶', room: '208'},
+        {name: '钱奶奶', room: '209'},
+        {name: '吴奶奶', room: '210'},
+    ];
+
+    let currentIndex = 0;
+    const maxVisibleButtons = 6;
+
+    // 动态生成按钮并插入到.buttons容器中
+    function generateButtons() {
+        const buttonsContainer = document.querySelector('.elderly');
+        buttonsContainer.innerHTML = '';
+        for (let i = 0; i < maxVisibleButtons; i++) {
+            let buttonIndex = currentIndex + i;
+            if (buttonIndex < loanTypes.length) {
+                let button = document.createElement('div');
+                button.className = 'button';
+                button.textContent = `${loanTypes[buttonIndex].name} ${loanTypes[buttonIndex].room}`;
+                buttonsContainer.appendChild(button);
+            }
+        }
+    }
+
+    function scrollButtons(direction) {
+        if (direction === 'left') {
+            currentIndex = Math.max(0, currentIndex - maxVisibleButtons);
+        } else {
+            currentIndex = Math.min(loanTypes.length - maxVisibleButtons, currentIndex + maxVisibleButtons);
+        }
+        generateButtons();
+    }
+
+    document.addEventListener('DOMContentLoaded', generateButtons);
+</script>
+<script>
+    const reviews = [
+        {
+            name: 'William Oliver',
+            text: 'Excellent visit. This was for a second opinion and an attempt to see.',
+            image: '/static/assets/images/faces/face1.jpg'
+        },
+        {
+            name: 'Benjamin',
+            text: 'Great service and attention to detail.',
+            image: '/static/assets/images/faces/face2.jpg'
+        },
+        {
+            name: 'Benjamin',
+            text: 'Great service and attention to detail.',
+            image: '/static/assets/images/faces/face3.jpg'
+        },
+        {
+            name: 'William Oliver',
+            text: 'Excellent visit. This was for a second opinion and an attempt to see.',
+            image: '/static/assets/images/faces/face4.jpg'
+        },
+    ];
+
+    const maxVisibleReviews = 2;
+
+    function setupCarousel() {
+        const slidesContainer = document.querySelector('.carousel-slides');
+        slidesContainer.innerHTML = '';  // Clear existing slides
+        for (let i = 0; i < maxVisibleReviews; i++) {
+            let reviewIndex = currentIndex + i;
+            if (reviewIndex < reviews.length) {
+                const review = reviews[reviewIndex];
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                slide.innerHTML = `
+                    <div class="slide-nurse">
+                        <img src="${review.image}" alt="${review.name}" style="border-radius: 50%"/>
+                        <div class="slide-text" style="margin-left: 20px">
+                            <h3>${review.name}</h3>
+                            <p>${review.text}</p>
+                        </div>
+                    </div>
+                `;
+                slidesContainer.appendChild(slide);
+            }
+        }
+    }
+
+    function moveSlides(direction) {
+        if (direction === 'left') {
+            currentIndex = Math.max(0, currentIndex - maxVisibleReviews);
+        } else {
+            currentIndex = Math.min(reviews.length - maxVisibleReviews, currentIndex + maxVisibleReviews);
+        }
+        setupCarousel();
+    }
+
+    document.addEventListener('DOMContentLoaded', setupCarousel);
+
+</script>
+<div class="content-wrapper">
+    <div style="font-size: 25px; margin-bottom: 15px">护工信息</div>
+    <div class="content">
+        <div class="introduction">
+            <div class="nurse">
+                <div class="picture">
+                    <img src="/static/assets/images/faces/face1.jpg" alt="头像照">
+                </div>
+                <div class="name">张三</div>
+            </div>
+            <div class="tabs">
+                <button class="tab" id="defaultOpen" onclick="openTab(event, 'Experience')">经历</button>
+                <button class="tab" onclick="openTab(event, 'Skills')">技能</button>
+                <button class="tab" onclick="openTab(event, 'Contact')">联系方式</button>
+            </div>
+            <div id="Experience" class="tabcontent">
+                经历tab
+            </div>
+            <div id="Skills" class="tabcontent">
+                技能tab
+            </div>
+            <div id="Contact" class="tabcontent">
+                联系方式tab
+            </div>
+        </div>
+        <div class="care-elderly">
+            <div style="font-size: 20px; text-align: center; margin-top: 20px">负责长者</div>
+            <div class="elderly">
+            </div>
+            <div class="time-info">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> 09:00 AM - 12:00 PM
+            </div>
+            <div class="navigation">
+                <span class="nav-button" onclick="scrollButtons('left')">&lt;</span>
+                <span class="nav-button" onclick="scrollButtons('right')">&gt;</span>
+            </div>
+        </div>
+    </div>
+    <div class="carousel">
+        <div class="carousel-controls">
+            <button onclick="moveSlides('left')">&#10094;</button>
+            <button onclick="moveSlides('right')">&#10095;</button>
+        </div>
+        <div class="carousel-window">
+            <div class="carousel-slides">
+                <!-- 滑块将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
