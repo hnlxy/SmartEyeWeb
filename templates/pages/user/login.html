@@ -36,7 +36,7 @@
 
         .image-container {
             flex: 1;
-            background-image: url('../../../static/login.jpg');/* Replace with your image URL */
+            background-image: url('../../../static/login.jpg'); /* Replace with your image URL */
             background-size: cover;
             background-position: center;
         }
@@ -46,12 +46,14 @@
             display: flex;
             width: 100%;
         }
-        .input-group label{
+
+        .input-group label {
             font-size: 30px;
             text-align: center;
             white-space: nowrap;
             margin-right: 20px;
         }
+
         .input-group input {
             width: 100%;
             padding: 10px;
@@ -94,7 +96,7 @@
     <title>智眼守护</title>
     <script src="/static/assets/vendors/js/jquery.min.js"></script>
     <script>
-        function login(){
+        function login() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
             $.ajax({
@@ -114,35 +116,43 @@
                         document.getElementById("password").value = "";
                     }
                 },
-                error: function (){
+                error: function () {
                     alert('请求失败');
                 }
             });
         }
+
+        $(document).ready(function () {
+            document.getElementById("password").addEventListener("keypress", function (event) {
+                if (event.code === "Enter") {
+                    event.preventDefault();
+                    login();
+                }
+            });
+        });
+
     </script>
 </head>
 <body>
-    <div class="main-container">
-        <div class="login-container">
-{#            <form method="post">#}
-                <h2 style="font-size: 30px">欢迎来到SmartEye</h2>
-                <div class="input-group">
-                    <label for="username">账户</label>
-                    <input type="text" id="username" name="username" placeholder="用户名" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">密码</label>
-                    <input type="password" id="password" name="password" placeholder="密码" required>
-                </div>
-                <button onclick="login()" style="font-size: 15px">登录</button>
-                <div class="signup">
-                    还没有账户？<a href="/register">立即注册</a>
-                </div>
-{#            </form>#}
+<div class="main-container">
+    <div class="login-container">
+        <h2 style="font-size: 30px">欢迎来到SmartEye</h2>
+        <div class="input-group">
+            <label for="username">账户</label>
+            <input type="text" id="username" name="username" placeholder="用户名" required>
         </div>
-        <div class="image-container">
-            <!-- Image will be shown here, set via CSS -->
+        <div class="input-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" placeholder="密码" required>
+        </div>
+        <button onclick="login()" style="font-size: 15px">登录</button>
+        <div class="signup">
+            还没有账户？<a href="/register">立即注册</a>
         </div>
     </div>
+    <div class="image-container">
+        <!-- Image will be shown here, set via CSS -->
+    </div>
+</div>
 </body>
 </html>

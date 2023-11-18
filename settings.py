@@ -9,7 +9,7 @@ class BaseConfig(object):
     # ����MySQL���û���
     USERNAME = "root"
     # ����MySQL������
-    PASSWORD = "lxy000000"
+    PASSWORD = "root"
     # MySQL�ϴ��������ݿ�����
     DATABASE = "smart_eye"
     # URL����

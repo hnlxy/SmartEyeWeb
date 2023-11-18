@@ -20,12 +20,12 @@ def create_app():
     app.config.from_object(settings.DevelopmentConfig)
     # TODO 注册蓝本
     app.register_blueprint(user_bp)
-    app.register_blueprint(elderly_bp, url_prefix="/pages/elderly-management")
-    app.register_blueprint(nurse_bp, url_prefix="/pages/nursing-management")
-    app.register_blueprint(permission_bp, url_prefix="/pages/permission-management")
-    app.register_blueprint(cost_bp, url_prefix="/pages/cost-management")
-    app.register_blueprint(system_report_bp, url_prefix="/pages/system-report")
-    app.register_blueprint(setting_bp, url_prefix="/pages/system-setting")
+    app.register_blueprint(elderly_bp, url_prefix="/elderly-management")
+    app.register_blueprint(nurse_bp, url_prefix="/nursing-management")
+    app.register_blueprint(permission_bp, url_prefix="/permission-management")
+    app.register_blueprint(cost_bp, url_prefix="/cost-management")
+    app.register_blueprint(system_report_bp, url_prefix="/system-report")
+    app.register_blueprint(setting_bp, url_prefix="/system-setting")
     app.secret_key = urandom(66)
     # TODO 初始化配置
     login_manager.init_app(app)
