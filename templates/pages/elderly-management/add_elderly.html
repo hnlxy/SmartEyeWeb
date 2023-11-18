@@ -1,2 +1,195 @@
 {% extends 'base.html' %}
 {% block title %}添加长者{% endblock title %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Microsoft YaHei', Arial, sans-serif;
+        background-color: #f1f3fd;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-group {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .file-input {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .file-input p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    input[type="file"] {
+        border: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .file-input:hover {
+        background-color: #f9f9f9;
+        
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: #5cb85c;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .submit-btn:hover {
+        background-color: #4cae4c;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .form-field {
+        flex-basis: 33%;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 120px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    .file-input label {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .file-input label:hover {
+        background-color: #0056b3;
+    }
+    
+    .file-input input[type="file"] {
+        display: none;
+    }
+
+</style>
+<div class="content-wrapper">
+<div style="font-size: 25px; margin-bottom: 15px">添加长者</div>
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <div class="file-input">
+                <label for="profile_picture"><i class="fas fa-pencil-alt"></i></label>
+                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="full_name">长者名字</label>
+                <input type="text" id="full_name" name="full_name" placeholder="长者名字" required>
+            </div>
+            <div class="form-field">
+                <label for="telephone">电话号码</label>
+                <input type="text" id="telephone" name="telephone" placeholder="电话号码" required>
+            </div>
+            <div class="form-field">
+                <label for="telephone">家庭住址</label>
+                <input type="text" id="address" name="address" placeholder="家庭住址" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="age">年龄</label>
+                <input type="number" id="age" name="age" placeholder="年龄" required>
+            </div>
+            <div class="form-field">
+                <label for="gender">性别</label>
+                <select id="gender" name="gender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="care_level">护理级别</label>
+                <select id="care_level" name="care_level">
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="elder_birth">出生日期</label>
+                <input type="text" id="elder_birth" name="elder_birth" placeholder="xxxx/xx/xx">
+            </div>
+            <div class="form-field" style="flex: content">
+                <label for="assign_caregiver">分配护工</label>
+                <input type="text" id="assign_caregiver" name="assign_caregiver" placeholder="护工ID">
+            </div>
+            <div class="form-field" style="flex: content">
+                <label for="room_num">房间号</label>
+                <input type="text" id="room_num" name="room_num" placeholder="房间号">
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label for="experience">备注</label>
+                <textarea id="experience" name="experience" placeholder=""></textarea>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <button class="submit-btn">添加</button>
+    </div>
+</div>
+</div>
+{% endblock content %}
