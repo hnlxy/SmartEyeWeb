@@ -13,16 +13,16 @@ from sqlalchemy.ext.hybrid import hybrid_property
 # 公告表
 class Announcement(db.Model):
     __tablename__ = 'announcements'
-    id = Column('公告ID', Integer, primary_key=True)
-    title = Column('标题', String(50), nullable=False)
-    content = Column('正文', Text, nullable=False)#
-    publication_date = Column('发布时间', DateTime, nullable=False,onupdate=datetime.now)
+    id = Column('annou_id', Integer, primary_key=True)
+    title = Column('title', String(50), nullable=False)
+    content = Column('body', Text, nullable=False)#
+    publication_date = Column('date', DateTime, nullable=False,onupdate=datetime.now)
 
-#护工表    
+#护工表
 class Caregiver(db.Model):
     __tablename__ = 'caregivers'
     id = Column('护工ID', String(255), primary_key=True)
-    name = Column('姓名', String(30), nullable=False)   
+    name = Column('姓名', String(30), nullable=False)
     phone_number = Column('联系电话', String(11), nullable=False)#
     address = Column('地址', String(255), nullable=False)
     birth = Column('出生年月', datetime, nullable=False)
@@ -84,7 +84,7 @@ class Elder(db.Model):
     assigned_caregiver = Column('分配护工', String)
     care_level = Column('护理级别', Enum('一级', '二级', '三级'), nullable=False)
     room_number = Column('房间号', String)
-    
+
 #长者费用表
 class ElderExpense(db.Model):
     __tablename__ = 'elder_expenses'
@@ -102,7 +102,7 @@ class ElderHealth(db.Model):
     blood_sugar = Column('血糖(空腹mmol/L/餐后mmol/L)', Double)
     heart_rate = Column('心率(次/分)', Integer)
     water_intake = Column('饮水量(mL)', Double)
-    
+
 #长者与监护人关系表
 class ElderGuardian(db.Model):
     __tablename__ = 'elder_guardian'

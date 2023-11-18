@@ -12,7 +12,7 @@ ALTER TABLE
     monthly_info ADD PRIMARY KEY(`date`);
 CREATE TABLE `users`(
     `user_id` VARCHAR(255) NOT NULL,
-    `guardians_id` VARCHAR(255) NOT NULL,
+    `guardian_id` VARCHAR(255) NOT NULL,
     `user_status` VARCHAR(255) NOT NULL,
     `user_name` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,

@@ -31,9 +31,4 @@ def create_app():
     login_manager.init_app(app)
     db.init_app(app)
 
-    # with app.app_context():
-    #     with db.engine.connect() as conn:
-    #         rs = conn.execute(text("select * from users"))
-    #         print(rs.fetchone())
-
     return app

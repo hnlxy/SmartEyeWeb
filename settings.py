@@ -10,7 +10,7 @@ class BaseConfig(object):
     # 要连接的数据库名
     DATABASE = "smart_eye"
     # 构造MySQL数据库连接 URL
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8?charset=utf8"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DATABASE}?charset=utf8"
     # 是否追踪对象的修改并发送信号
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # 是否启用调试模式
