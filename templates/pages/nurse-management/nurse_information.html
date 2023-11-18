@@ -14,6 +14,7 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .nurse {
@@ -275,7 +276,7 @@
                 slide.className = 'slide';
                 slide.innerHTML = `
                     <div class="slide-nurse">
-                        <img src="${review.image}" alt="${review.name}" style="border-radius: 50%"/>
+                        <img src="${review.image}" alt="${review.name}" style="border-radius: 10px"/>
                         <div class="slide-text" style="margin-left: 20px">
                             <h3>${review.name}</h3>
                             <p>${review.text}</p>
