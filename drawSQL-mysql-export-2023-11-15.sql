@@ -83,13 +83,13 @@ CREATE TABLE `caregivers`(
     `qualification_photo` BINARY(16) NOT NULL
 );
 ALTER TABLE
-    `caregivers` ADD PRIMARY KEY(`护工ID`);
+    `caregivers` ADD PRIMARY KEY(`caregiver_id`);
 CREATE TABLE `elder_health`(
     `elder_ID` VARCHAR(255) NOT NULL PRIMARY KEY,
-    `Blood_pressure` DOUBLE NOT NULL,
-    `Blood_Oxygen` DOUBLE NOT NULL,
-    `Blood_glucose` DOUBLE NOT NULL,
-    `Heart_rate` INT NOT NULL,
+    `blood_pressure` DOUBLE NOT NULL,
+    `blood_Oxygen` DOUBLE NOT NULL,
+    `blood_glucose` DOUBLE NOT NULL,
+    `heart_rate` INT NOT NULL,
     `water_intake` DOUBLE NOT NULL
 );
 ALTER TABLE
