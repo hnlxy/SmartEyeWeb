@@ -1,2 +1,146 @@
 {% extends 'base.html' %}
 {% block title %}长者权益{% endblock title %}
+{%block content%}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #ecf0f1;
+    margin: 0;
+    padding: 20px;
+  }
+  .dashboard {
+    width: 1037px;
+    margin: auto;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .profile img {
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .profile-info {
+    font-size: 0.9em;
+  }
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex-basis: calc(33.333% - 10px);
+    background: #fff;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card:nth-child(2n) {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .card-content {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .card-content h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+  .card-content p {
+    margin: 0;
+  }
+  .card-footer {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 0.8em;
+    color: #999;
+  }
+  .card-footer a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  .card-icon {
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+  }
+  /* Add specific icons' background images here using CSS classes or inline styles */
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="profile">
+    <img src="'/static/assets/images/faces/face2.jpg" width="70">
+    <div class="profile-info">
+      <strong>王奶奶</strong>
+      <p>82岁</p>
+    </div>
+  </div>
+  <div class="card-container">
+    <!-- Row 1 -->
+    <div class="card">
+      <div class="card-icon" style="background-image: url('blood-pressure-icon.png');"></div>
+      <div class="card-content">
+        <h3>128/80</h3>
+        <p>血压</p>
+      </div>
+      <div class="card-footer"><a href="#">查看详细数据 ></a></div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background-image: url('heart-rate-icon.png');"></div>
+      <div class="card-content">
+        <h3>93</h3>
+        <p>心率</p>
+      </div>
+      <div class="card-footer"><a href="#">查看详细数据 ></a></div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background-image: url('temperature-icon.png');"></div>
+      <div class="card-content">
+        <h3>36.5°C</h3>
+        <p>体温</p>
+      </div>
+      <div class="card-footer"><a href="#">更多 ></a></div>
+    </div>
+    <!-- Row 2 -->
+    <div class="card">
+      <div class="card-icon" style="background-image: url('sleep-icon.png');"></div>
+      <div class="card-content">
+        <h3>6H 2.5H</h3>
+        <p>睡眠</p>
+      </div>
+      <div class="card-footer"><a href="#">查看详细数据 ></a></div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background-image: url('blood-sugar-icon.png');"></div>
+      <div class="card-content">
+        <h3>5.8MMOL/L</h3>
+        <p>血糖</p>
+      </div>
+      <div class="card-footer"><a href="#">查看详细数据 ></a></div>
+    </div>
+    <div class="card">
+      <!-- Placeholder for the 6th card -->
+      <!-- You can duplicate any of the above cards and change its contents accordingly -->
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

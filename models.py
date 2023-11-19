@@ -1,6 +1,6 @@
 from extensions import db
 from sqlalchemy import Column, Integer, String, DateTime,Float,Text,Boolean,Enum,ForeignKey,LargeBinary,Double
-from datetime import datetime
+from datetime import time, datetime
 from sqlalchemy.ext.hybrid import hybrid_property
 
 #管理员表
@@ -25,8 +25,8 @@ class Caregiver(db.Model):
     name = Column('姓名', String(30), nullable=False)
     phone_number = Column('联系电话', String(11), nullable=False)#
     address = Column('地址', String(255), nullable=False)
-    birth = Column('出生年月', datetime, nullable=False)
-    enter_date = Column('录用日期',datetime, nullable=False)
+    birth = Column('出生年月', DateTime, nullable=False)
+    enter_date = Column('录用日期',DateTime, nullable=False)
     gender = Column('性别', Enum('男', '女'), nullable=False)#
     email = Column('邮箱', String(255), nullable=True)
     department = Column('部门', String(10), nullable=True)
@@ -52,7 +52,7 @@ class Guardian(db.Model):
 #每月信息表
 class MonthlyInfo(db.Model):
     __tablename__ = 'monthly_info'
-    month = Column('日期', datetime, primary_key=True)
+    month = Column('日期', DateTime, primary_key=True)
     resident_count = Column('住院人数', Integer, nullable=False)
     caregiver_count = Column('护工人数', Integer, nullable=False)
     available_beds = Column('剩余床位', Integer, nullable=False)
@@ -80,7 +80,7 @@ class Elder(db.Model):
     gender = Column('性别', Enum('男', '女'), nullable=False)
     phone_number = Column('电话号码', String(11), nullable=False)
     home_address = Column('家庭住址', String)
-    admission_date = Column('入住日期', datetime)
+    admission_date = Column('入住日期', DateTime)
     assigned_caregiver = Column('分配护工', String)
     care_level = Column('护理级别', Enum('一级', '二级', '三级'), nullable=False)
     room_number = Column('房间号', String)
@@ -88,15 +88,15 @@ class Elder(db.Model):
 #长者费用表
 class ElderExpense(db.Model):
     __tablename__ = 'elder_expenses'
-    elder_id = Column('长者ID', String, foreign_key=(Elder.id))
+    elder_id = Column('长者ID', String,primary_key=True ,foreign_key=(Elder.id))
     deposit = Column('押金(元)', Integer)
     payment_record = Column('缴费记录(元)', Integer)
-    payment_date = Column('缴费时间', datetime)
+    payment_date = Column('缴费时间', DateTime)
 
 #长者健康表
 class ElderHealth(db.Model):
     __tablename__ = 'elder_health'
-    elder_id = Column('长者ID', Integer, foreign_key=(Elder.id))
+    elder_id = Column('长者ID', Integer, foreign_key=(Elder.id),primary_key=True)
     blood_pressure = Column('血压(收缩压kpa/舒张压kpa)', String)
     blood_oxygen = Column('血氧(%)', Double)
     blood_sugar = Column('血糖(空腹mmol/L/餐后mmol/L)', Double)
@@ -106,7 +106,7 @@ class ElderHealth(db.Model):
 #长者与监护人关系表
 class ElderGuardian(db.Model):
     __tablename__ = 'elder_guardian'
-    elder_id = Column('长者ID', String, foreign_key=(Elder.id))
-    guardian_id = Column('监护人ID', String, foreign_key=(Guardian.id))
+    elder_id = Column('长者ID', String, foreign_key=(Elder.id),primary_key=True)
+    guardian_id = Column('监护人ID', String, foreign_key=(Guardian.id),primary_key=True)
 
 
