@@ -16,4 +16,4 @@ def index():
 
 if __name__ == '__main__':
     config = DevelopmentConfig
-    app.run(debug=config.debug)
+    app.run(debug=True)
