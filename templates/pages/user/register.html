@@ -107,19 +107,19 @@
             <h2>注册</h2>
             <div class="form-group">
                 <label for="username">账户</label>
-                <input type="text" id="username" name="username" placeholder="请输入账户" value="1">
+                <input type="text" id="username" name="username" placeholder="请输入账户">
             </div>
             <div class="form-group">
                 <label for="password">密码</label>
-                <input type="password" id="password" name="password" placeholder="请输入密码" value="1">
+                <input type="password" id="password" name="password" placeholder="请输入密码">
             </div>
             <div class="form-group">
                 <label for="double_password">再次输入密码</label>
-                <input type="password" id="re_password" name="re_password" placeholder="请确认密码" value="1">
+                <input type="password" id="re_password" name="re_password" placeholder="请确认密码">
             </div>
             <div class="form-group">
                 <label for="email">邮箱</label>
-                <input type="email" id="email" name="email" placeholder="请输入邮箱" value="1@qq.com">
+                <input type="email" id="email" name="email" placeholder="请输入邮箱">
             </div>
             <div class="signup" style="display: flex">
                 <label for="terms"></label><input type="checkbox" id="terms">
@@ -129,7 +129,7 @@
                 <button type="submit">注册</button>
             </div>
             <div class="signup">
-                        已有账号？<a href="/login">登录</a>
+                已有账号？<a href="/login">登录</a>
             </div>
         </form>
     </div>
@@ -145,40 +145,36 @@
         let password = $("#password").val();
         let rePassword = $("#re_password").val();
         let email = $("#email").val();
-        {#if (username.length < 6 || username.length > 32) {#}
-        {#    alert("账户长度必须介于6和32之间");#}
-        {# }#}
-        {#else if (password.length < 6 || password.length > 32) {#}
-        {#    alert("密码长度必须介于6和32之间");#}
-        {# }#}
-        {#else if (password !== rePassword) {#}
-        {#    alert("两次输入密码不一致");#}
-        {# }#}
-        {#else {#}
-        obj = {
-            'username': username,
-            'password': password,
-            'email': email
-        }
-        console.log(obj);
-        $.ajax({
-            url: "/register",
-            type: "POST",
-            contentType: "application/json",
-            date: JSON.stringify(obj),
-            dataType: "json",
-            success: function (response) {
-                if (response.success === undefined || response.success) {
-                    window.location.href = "/login";
-                } else {
+        if (username.length < 6 || username.length > 32) {
+            alert("账户长度必须介于6和32之间");
+         }
+        else if (password.length < 6 || password.length > 32) {
+            alert("密码长度必须介于6和32之间");
+         }
+        else if (password !== rePassword) {
+            alert("两次输入密码不一致");
+         }
+        else {
+            $.ajax({
+                url: "/register",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    'username': username,
+                    'password': password,
+                    'email': email
+                }),
+                success: function (response) {
                     alert(response.message);
+                    if (response.success) {
+                        window.location.href = "/login";
+                    }
+                },
+                error: function () {
+                    alert('请求失败');
                 }
-            },
-            error: function () {
-                alert('请求失败');
-            }
-        });
-
+            });
+        }
     });
 </script>
 </html>

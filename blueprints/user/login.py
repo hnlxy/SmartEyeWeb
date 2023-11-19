@@ -29,4 +29,3 @@ def login():
         # 查询到账户，但密码错误
         else:
             return jsonify({'success': False, 'message': '密码错误'}), 200, {'ContentType': 'application/json'}
-
