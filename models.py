@@ -12,8 +12,8 @@ class Admin(db.Model):
     username = Column('username', String, nullable=False)
     password = Column('password', String, nullable=False)
     email = Column('email', String, nullable=False)  # 注册时用来接收验证码
-    gmt_create = Column('gmt_create', DateTime, nullable=False)  # 创建时间
-    gmt_update = Column('gmt_update', DateTime, nullable=False)  # 更新时间
+    gmt_create = Column('gmt_create', DateTime, nullable=False, default=datetime.now())  # 创建时间
+    gmt_update = Column('gmt_update', DateTime, nullable=False, default=datetime.now())  # 更新时间
 
 
 # 公告表

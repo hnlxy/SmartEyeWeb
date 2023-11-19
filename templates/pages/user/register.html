@@ -102,22 +102,23 @@
 <body>
 <div class="main-container">
     <div class="container">
+        <form action="/register" method="post">
             <h2>注册</h2>
             <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" id="username" placeholder="用户名">
+                <label for="username">账户</label>
+                <input type="text" id="username" name="username" placeholder="用户名">
             </div>
             <div class="form-group">
                 <label for="password">密码</label>
-                <input type="password" id="password" placeholder="********">
+                <input type="password" id="password" name="password" placeholder="********">
             </div>
             <div class="form-group">
                 <label for="double_password">再次输入密码</label>
-                <input type="password" id="double_password" placeholder="********">
+                <input type="password" id="re_password" name="re_password" placeholder="********">
             </div>
             <div class="form-group">
                 <label for="email">邮箱</label>
-                <input type="email" id="email" placeholder="johndoe@example.com">
+                <input type="email" id="email" name="email" placeholder="johndoe@example.com">
             </div>
             <div class="signup" style="display: flex">
                 <label for="terms"></label><input type="checkbox" id="terms">
@@ -129,6 +130,7 @@
             <div class="signup">
                         已有账号？<a href="/login">登录</a>
             </div>
+        </form>
     </div>
     <div class="image-container">
         <!-- Image will be shown here, set via CSS -->
