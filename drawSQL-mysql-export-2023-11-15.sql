@@ -1,5 +1,13 @@
 -- CREATE DATABASE smart_eye;
 USE smart_eye;
+CREATE TABLE `admins`(
+    `id` bigint primary key auto_increment,
+    `username` varchar(32) unique not null,
+    `password` varchar(32) not null,
+    `email` varchar(32) unique not null,
+    `gmt_create` datetime not null default now(),
+    `gmt_update` datetime not null default now()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 CREATE TABLE `monthly_info`(
     `date` DATETIME NOT NULL,
     `all_people` INT NOT NULL,
