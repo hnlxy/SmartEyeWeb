@@ -8,7 +8,7 @@ from models import Admin, Announcement
 @user_bp.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return render_template('pages/user/login.html')
+        return render_template('pages/admin/login.html')
     else:
         data = request.get_json()
         username = data['username']

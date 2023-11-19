@@ -1,5 +1,4 @@
 import json
-
 from blueprints.user import user_bp
 from flask import request, render_template, redirect, session, url_for, jsonify
 from extensions import db
@@ -9,11 +8,11 @@ from models import *
 @user_bp.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "GET":
-        return render_template('pages/user/register.html')
+        return render_template('pages/admin/register.html')
     else:
         try:
             data = request.get_json()
-            print(data)
+            # print(data)
             admin = Admin(
                 username=data["username"],
                 password=data["password"],
