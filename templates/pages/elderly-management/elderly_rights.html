@@ -31,7 +31,7 @@
   }
   .card-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* 这将在卡片之间均匀分配空间 */
     flex-wrap: wrap;
   }
   .card {
@@ -45,11 +45,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-size: contain; /* 确保图片填充整个卡片 */
+    background-position: center; /* 居中图片 */
+    background-repeat: no-repeat; /* 防止图片重复 */
   }
-  .card:nth-child(2n) {
-    margin-right: 15px;
-    margin-left: 15px;
-  }
+
   .card-content {
     text-align: center;
     margin: 20px 0;
@@ -85,7 +85,7 @@
 <body>
 <div class="dashboard">
   <div class="profile">
-    <img src="'/static/assets/images/faces/face2.jpg" width="70">
+    <img src='/static/assets/images/faces/face2.jpg' width="70">
     <div class="profile-info">
       <strong>王奶奶</strong>
       <p>82岁</p>
@@ -93,51 +93,57 @@
   </div>
   <div class="card-container">
     <!-- Row 1 -->
-    <div class="card">
-      <div class="card-icon" style="background-image: url('blood-pressure-icon.png');"></div>
+    <div class="card" style="background-image: url('/static/assets/images/elder_management/elder_rights/xueya.png');">
+      <div class="card-icon"></div>
       <div class="card-content">
         <h3>128/80</h3>
         <p>血压</p>
       </div>
       <div class="card-footer"><a href="#">查看详细数据 ></a></div>
     </div>
-    <div class="card">
-      <div class="card-icon" style="background-image: url('heart-rate-icon.png');"></div>
+    <div class="card"  style="background-image: url('/static/assets/images/elder_management/elder_rights/xinlv.jpg');">
+      <div class="card-icon"></div>
       <div class="card-content">
         <h3>93</h3>
         <p>心率</p>
       </div>
       <div class="card-footer"><a href="#">查看详细数据 ></a></div>
     </div>
-    <div class="card">
-      <div class="card-icon" style="background-image: url('temperature-icon.png');"></div>
-      <div class="card-content">
-        <h3>36.5°C</h3>
-        <p>体温</p>
-      </div>
-      <div class="card-footer"><a href="#">更多 ></a></div>
-    </div>
+
     <!-- Row 2 -->
-    <div class="card">
-      <div class="card-icon" style="background-image: url('sleep-icon.png');"></div>
+    <div class="card"  style="background-image: url('/static/assets/images/elder_management/elder_rights/shuimian.jpg');">
+      <div class="card-icon" ></div>
       <div class="card-content">
         <h3>6H 2.5H</h3>
         <p>睡眠</p>
       </div>
       <div class="card-footer"><a href="#">查看详细数据 ></a></div>
     </div>
-    <div class="card">
-      <div class="card-icon" style="background-image: url('blood-sugar-icon.png');"></div>
+    <div class="card"  style="background-image: url('/static/assets/images/elder_management/elder_rights/xuetang.jpg');">
+      <div class="card-icon" ></div>
       <div class="card-content">
         <h3>5.8MMOL/L</h3>
         <p>血糖</p>
       </div>
       <div class="card-footer"><a href="#">查看详细数据 ></a></div>
     </div>
-    <div class="card">
-      <!-- Placeholder for the 6th card -->
-      <!-- You can duplicate any of the above cards and change its contents accordingly -->
+    <div class="card"  style="background-image: url('/static/assets/images/elder_management/elder_rights/tiwen.png');">
+      <div class="card-icon"></div>
+      <div class="card-content">
+        <h3>36.5°C</h3>
+        <p>体温</p>
+      </div>
+      <div class="card-footer"><a href="#">更多 ></a></div>
     </div>
+    <div class="card"  style="background-image: url('/static/assets/images/elder_management/elder_rights/maibo.jpg');">
+      <div class="card-icon" ></div>
+      <div class="card-content">
+        <h3>5.8MMOL/L</h3>
+        <p>脉搏</p>
+      </div>
+      <div class="card-footer"><a href="#">查看详细数据 ></a></div>
+    </div>
+
   </div>
 </div>
 
