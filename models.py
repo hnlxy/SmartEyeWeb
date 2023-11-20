@@ -21,7 +21,7 @@ class Admin(db.Model):
 # 公告表
 class Announcement(db.Model):
     __tablename__ = 'announcements'
-    id = Column('annou_id', Integer, primary_key=True)
+    announcement_id = Column('announcement_id', Integer, primary_key=True)
     title = Column('title', String(50), nullable=False)
     content = Column('content', Text, nullable=False)  #
     publication_date = Column('publication_date', DateTime, nullable=False, onupdate=datetime.now)
@@ -30,17 +30,16 @@ class Announcement(db.Model):
 # 护工表
 class Caregiver(db.Model):
     __tablename__ = 'caregivers'
-    id = Column('caregiver_id', String(255), primary_key=True)
-    name = Column('caregiver_name', String(30), nullable=False)
-    phone_number = Column('caregiver_phone', String(11), nullable=False)  #
-    address = Column('caregiver_address', String(255), nullable=False)
-    birth = Column('caregiver_birth', DateTime, nullable=False)
-    enter_date = Column('hired_date', DateTime, nullable=False)
-    gender = Column('caregiver_gender', Enum('男', '女'), nullable=False)  #
-    email = Column('caregiver_email', String(255), nullable=True)
-    department = Column('caregiver_department', String(10), nullable=True)
-    experience = Column('experienced', String(255), nullable=True)
-    profile_photo = Column('photo', LargeBinary, nullable=False)
+    caregiver_id = Column('caregiver_id', String(255), primary_key=True)
+    caregiver_name = Column('caregiver_name', String(30), nullable=False)
+    caregiver_phone = Column('caregiver_phone', String(11), nullable=False)  #
+    caregiver_address = Column('caregiver_address', String(255), nullable=False)
+    hired_date = Column('hired_date', DateTime, nullable=False)
+    caregiver_gender = Column('caregiver_gender', Enum('男', '女'), nullable=False)  #
+    caregiver_email = Column('caregiver_email', String(255), nullable=True)
+    caregiver_department = Column('caregiver_department', String(10), nullable=True)
+    experience = Column('experience', String(255), nullable=True)
+    profile_photo = Column('profile_photo', LargeBinary, nullable=False)
     qualification_photo = Column('qualification_photo', LargeBinary, nullable=True)
 
     # 获取年龄
@@ -53,50 +52,50 @@ class Caregiver(db.Model):
 # 监护者表
 class Guardian(db.Model):
     __tablename__ = 'guardians'
-    id = Column('guardian_id', String(255), primary_key=True)
-    name = Column('guardian_name', String(30), nullable=False)
-    phone_number = Column('guardian_phone', String(11), nullable=False)  #
-    gender = Column('guardian_gender', Enum('男', '女'), nullable=False)  #
-    address = Column('guardian_address', String(255), nullable=False)
+    guardian_id = Column('guardian_id', String(255), primary_key=True)
+    guardian_name = Column('guardian_name', String(30), nullable=False)
+    guardian_phone = Column('guardian_phone', String(11), nullable=False)  #
+    guardian_gender = Column('guardian_gender', Enum('男', '女'), nullable=False)  #
+    guardian_address = Column('guardian_address', String(255), nullable=False)
     relation = Column('relation', String, nullable=True)
-    notes = Column('remark', String)
+    remark = Column('remark', String)
 
 
 # 每月信息表
 class MonthlyInfo(db.Model):
     __tablename__ = 'monthly_info'
     date = Column('date', DateTime, primary_key=True)
-    resident_count = Column('all_people', Integer, nullable=False)
-    caregiver_count = Column('caregivers', Integer, nullable=False)
-    available_beds = Column('rest_beds', Integer, nullable=False)
+    all_people = Column('all_people', Integer, nullable=False)
+    caregivers = Column('caregivers', Integer, nullable=False)
+    available_beds = Column('available_beds', Integer, nullable=False)
     income = Column('income', Integer, nullable=False)
-    expenses = Column('expense', Integer, nullable=False)
+    expenses = Column('expenses', Integer, nullable=False)
 
 
 # 用户表
 class User(db.Model):
     __tablename__ = 'users'
     user_id = Column('user_id', String(255), primary_key=True)
-    account_status = Column('user_status', Boolean, nullable=False)
-    username = Column('user_name', String(20), nullable=False)
+    user_status = Column('user_status', Boolean, nullable=False)
+    username = Column('username', String(20), nullable=False)
     password = Column('password', String(30), nullable=False)
-    phone_number = Column('user_phone', String(11), nullable=False)
-    address = Column('user_address', String(255), nullable=False)
-    email = Column('user_email', String)
+    user_telephone = Column('user_telephone', String(11), nullable=False)
+    user_address = Column('user_address', String(255), nullable=False)
+    user_email = Column('user_email', String)
 
 
 # 长者表
 class Elder(db.Model):
     __tablename__ = 'elders'
-    id = Column('elder_id', String, primary_key=True)
-    name = Column('elder_name', String)
-    gender = Column('elder_gender', Enum('男', '女'), nullable=False)
-    phone_number = Column('elder_phone', String(11), nullable=False)
-    home_address = Column('elder_address', String)
-    admission_date = Column('elder_birth', DateTime)
+    elder_id = Column('elder_id', String, primary_key=True)
+    elder_name = Column('elder_name', String)
+    elder_gender = Column('elder_gender', Enum('男', '女'), nullable=False)
+    elder_phone = Column('elder_phone', String(11), nullable=False)
+    elder_address = Column('elder_address', String)
+    elder_birth = Column('elder_birth', DateTime)
     assigned_caregiver = Column('assign_caregiver', String)
     care_level = Column('level_care', Enum('一级', '二级', '三级'), nullable=False)
-    room_number = Column('room_num', String)
+    room_number = Column('room_number', String)
 
 
 # 长者费用表
