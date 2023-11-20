@@ -104,7 +104,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: #007bff;
+        background-color: #00008B;
         color: white;
         text-align: center;
         padding: 10px;
@@ -120,17 +120,16 @@
     .file-input input[type="file"] {
         display: none;
     }
-
+  
 </style>
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">添加长者</div>
 <div class="card">
     <div class="card-body">
-        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626" href="add-elderly" >长者信息</a>
-        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626;text-decoration: none" href="add_guardian" >监护人信息</a>
-        <div class="form-group">
+        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626;text-decoration: none" href="add-elderly" >长者信息</a>
+        <div class="form-group" style="background-color: #A9A9A9;"> 
             <div class="file-input">
-                <label for="profile_picture"><i class="fas fa-pencil-alt"></i></label>
+                <label for="profile_picture"><i class="pencil-icon"></i></label>
                 <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
             </div>
         </div>
@@ -189,8 +188,60 @@
                 <textarea id="experience" name="experience" placeholder=""></textarea>
             </div>
         </div>
+
+        <a style="font-size: 25px; margin-bottom: 15px; color:#3f2626;text-decoration: none" href="add_guardian" >监护人信息</a>
+        <div class="form-group">
+            <div class="file-input">
+                <label for="profile_picture"><i class="octicon octicon-pencil"></i></label>
+                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="full_name">监护人名字</label>
+                <input type="text" id="full_name" name="full_name" placeholder="长者名字" required>
+            </div>
+            <div class="form-field">
+                <label for="telephone">电话号码</label>
+                <input type="text" id="telephone" name="telephone" placeholder="电话号码" required>
+            </div>
+            <div class="form-field">
+                <label for="telephone">家庭住址</label>
+                <input type="text" id="address" name="address" placeholder="家庭住址" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-field">
+                <label for="age">年龄</label>
+                <input type="number" id="age" name="age" placeholder="年龄" required>
+            </div>
+            <div class="form-field">
+                <label for="gender">性别</label>
+                <select id="gender" name="gender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="relation">关系</label>
+                <select id="relation" name="relation">
+                    <option value="father_son">父子</option>
+                    <option value="father_daugther">父女</option>
+                    <option value="mother_daugther">母女</option>
+                    <option value="mother_daugther">母女</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <label for="experience">备注</label>
+                <textarea id="experience" name="experience" placeholder=""></textarea>
+            </div>
+        </div>
         <div style="clear: both;"></div>
-        <button class="submit-btn" onclick="window.location.href='add_guardian'">下一步</button>
+        <button class="submit-btn">添加</button>
+    </div>
+</div>
     </div>
 </div>
 </div>
