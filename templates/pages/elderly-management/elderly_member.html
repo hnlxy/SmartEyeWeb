@@ -9,8 +9,9 @@
 }
 .table{
     background-color: #f7f8fd;
-    color: #808080; /* 设置字体颜色为浅灰色 */
-}
+    color: #333333; /* 设置字体颜色为浅灰色 */
+   
+  }
 
 .container{
   width: 100%;
@@ -23,13 +24,106 @@
 .table  thead{
   color: #A9A9A9;
 }
+.filter-container {
+  width: 100%;
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: flex-end; /* 使元素靠右对齐 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-bottom: 10px; /* 在筛选框和表格之间添加一些间隔 */
+}
+
+.filter-item {
+  margin-left: 10px; /* 在筛选框的各个元素之间添加一些间隔 */
+}
+
+.filter-item label,
+.filter-item select,
+.filter-item input,
+.filter-item button {
+  min-width: 100px; /* 根据需要调整最小宽度 */
+  margin: 0 5px; /* 在元素之间添加间隔 */
+}
+
+#search-input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  outline: none; /* 移除轮廓 */
+  transition: border-color 0.3s; /* 平滑过渡效果 */
+}
+
+#search-input:focus {
+  border-color: #007bff; /* 聚焦时边框颜色变化 */
+}
+
+
+#column-select {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#column-select:focus {
+  border-color: #007bff;
+}
+
+
+.filter-container button {
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.filter-container button:hover {
+  background-color: #0056b3; /* 悬停时背景色变深 */
+}
+
+
+
+
+
+
 </style>
 
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">长者中心</div>
+    <div class="filter-container">
+      <span class="filter-item">
+          <select id="column-select">
+              <option value="name">长者姓名</option>
+              <option value="date">入住日期</option>
+              <option value="worker">分配护工</option>
+              <option value="level">护理级别</option>
+              <option value="health">健康状况</option>
+              <option value="room">房间号</option>
+          </select>
+      </span>
+      <span class="filter-item">
+          <input type="text" id="search-input" placeholder="输入搜索内容...">
+      </span>
+      <span class="filter-item">
+          <button onclick="filterTable()">搜索</button>
+      </span>
+  </div>
+  
     <div class="card">
     <div class="card-body">
         <div class="table-responsive">
+          
         <table class="table">
           <thead>
 
@@ -40,9 +134,10 @@
               <th>ID</th>
               <th>长者姓名</th>
               <th>入住日期</th>
-              <th>分配护工</th>
+              <th>所在地区</th>
               <th>护理级别</th>
               <th>健康状况</th>
+              <th>护工</th>
               <th>房间号</th>
             </tr>
           </thead>
@@ -61,6 +156,7 @@
                 {{ result[5] }}
                 </td>
               <td>{{ result[6] }}</td>
+              <td>{{ result[7] }}</td>
             </tr>
               {% endfor %}
 
@@ -91,5 +187,31 @@
 </div>
 </div>
 <script src="{{ url_for('static', filename='assets/js/TableCheckboxController.js') }}"></script>
+<script>
+  function filterTable() {
+    // 获取下拉菜单和搜索框的值
+    var columnSelect = document.getElementById("column-select");
+    var searchText = document.getElementById("search-input").value.toUpperCase();
+    
+    // 获取表格和行
+    var table = document.querySelector(".table");
+    var tr = table.getElementsByTagName("tr");
+
+    // 遍历所有行，隐藏那些不匹配的行
+    for (var i = 0; i < tr.length; i++) {
+        // 根据下拉菜单选择的列索引获取单元格
+        var td = tr[i].getElementsByTagName("td")[columnSelect.selectedIndex];
+        if (td) {
+            // 如果单元格内容匹配搜索文本，则显示该行，否则隐藏
+            if (td.textContent.toUpperCase().indexOf(searchText) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+  </script>
 
 {% endblock content %}
