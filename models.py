@@ -1,8 +1,7 @@
 from extensions import db
-from sqlalchemy import Column, Integer, String, DateTime, Float, Text, Boolean, Enum, ForeignKey, LargeBinary, Double
-from datetime import time, datetime
 from sqlalchemy import Column, Integer, String, DateTime, Float, Text, Boolean, Enum, ForeignKey, LargeBinary, Double, \
-    BigInteger
+    SmallInteger, BigInteger
+from datetime import time, datetime
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
 
@@ -32,21 +31,22 @@ class Caregiver(db.Model):
     __tablename__ = 'caregivers'
     caregiver_id = Column('caregiver_id', String(255), primary_key=True)
     caregiver_name = Column('caregiver_name', String(30), nullable=False)
-    caregiver_phone = Column('caregiver_phone', String(11), nullable=False)  #
+    caregiver_age = Column('caregiver_age', SmallInteger, nullable=False)
+    caregiver_phone = Column('caregiver_phone', String(15), nullable=False)  #
     caregiver_address = Column('caregiver_address', String(255), nullable=False)
     hired_date = Column('hired_date', DateTime, nullable=False)
     caregiver_gender = Column('caregiver_gender', Enum('男', '女'), nullable=False)  #
     caregiver_email = Column('caregiver_email', String(255), nullable=True)
-    caregiver_department = Column('caregiver_department', String(10), nullable=True)
+    caregiver_department = Column('caregiver_department', String(20), nullable=True)
     experience = Column('experience', String(255), nullable=True)
-    profile_photo = Column('profile_photo', LargeBinary, nullable=False)
-    qualification_photo = Column('qualification_photo', LargeBinary, nullable=True)
+    profile_photo = Column('profile_photo', String(255), nullable=False)
+    qualification_photo = Column('qualification_photo', String(255), nullable=True)
 
     # 获取年龄
     @hybrid_property
     def age(self):
         return (self.enter_date.year - self.birth.year) - (
-                    (self.enter_date.month, self.enter_date.day) < (self.birth.month, self.birth.day))
+                (self.enter_date.month, self.enter_date.day) < (self.birth.month, self.birth.day))
 
 
 # 监护者表
@@ -124,7 +124,6 @@ class ElderGuardian(db.Model):
     __tablename__ = 'elder_guardian'
     elder_id = Column('elder_id', String, primary_key=True)
     guardian_id = Column('guardian_id', String, primary_key=True)
-
 
 # # 护工表
 # class Caregiver(db.Model):

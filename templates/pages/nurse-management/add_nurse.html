@@ -118,19 +118,79 @@
     }
 
 </style>
+<script>
+$(document).ready(function(){
+var profileInput = document.getElementById('profile_picture');
+var coverInput = document.getElementById('cover_picture');
+profileInput.addEventListener('change', function(event) {
+    handleFileChange(event, 'profile_picture_label');
+});
+coverInput.addEventListener('change', function(event) {
+    handleFileChange(event, 'cover_picture_label');
+});
+function handleFileChange(event, labelId) {
+    var files = event.target.files;
+    if (files.length > 0) {
+        var file = files[0];
+        document.getElementById(labelId).innerText = '已选中文件: ' + file.name;
+    }
+}
+})
+function add_nurse(){
+    var isAllDataFilled = true;
+    var requiredFields = ['nurse_id', 'full_name', 'telephone', 'age', 'gender', 'department', 'email', 'address', 'experience'];
+    requiredFields.forEach(function(field) {
+        if ($('#' + field).val() === '') {
+            isAllDataFilled = false;
+        }
+    });
+    if (!isAllDataFilled) {
+        alert('请填写完整信息');
+        return;
+    }
+    let formData = new FormData();
+    let profile_picture = document.getElementById('profile_picture').files[0];
+    let cover_picture = document.getElementById('cover_picture').files[0];
+    formData.append('profile_picture', profile_picture);
+    formData.append('cover_picture', cover_picture);
+    formData.append('nurse_id', $('#nurse_id').val());
+    formData.append('full_name', $('#full_name').val());
+    formData.append('telephone', $('#telephone').val());
+    formData.append('age', $('#age').val());
+    formData.append('gender', $('#gender').find(":selected").text());
+    formData.append('department', $('#department').find(":selected").text());
+    formData.append('email', $('#email').val());
+    formData.append('address', $('#address').val());
+    formData.append('experience', $('#experience').val());
+    $.ajax({
+        url: '/nurse-management/add-nurse',
+        type: 'POST',
+        data: formData,
+        contentType: false, // 必须为 false，以避免 jQuery 设置错误的内容类型
+        processData: false, // 必须为 false，以防止 jQuery 将 FormData 转换为字符串
+        success: function(response){
+            if (response.success) alert('添加成功');
+            else alert(response.message);
+        },
+        error: function (){
+            alert('请求失败');
+        }
+    });
+}
+</script>
 <div class="content-wrapper">
 <div style="font-size: 25px; margin-bottom: 15px">添加护工</div>
 <div class="card">
     <div class="card-body">
         <div class="form-group">
             <div class="file-input">
-                <label for="profile_picture">头像照</label>
+                <label for="profile_picture" id="profile_picture_label">头像照</label>
                 <p>点击此处上传图片</p>
                 <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
                 <p>最大图片大小 2MB</p>
             </div>
             <div class="file-input" style="float: right;">
-                <label for="cover_picture">资质证明</label>
+                <label for="cover_picture" id="cover_picture_label">资质证明</label>
                 <p>点击此处上传图片</p>
                 <input type="file" id="cover_picture" name="cover_picture" accept="image/*">
                 <p>最大图片大小 2MB</p>
@@ -187,7 +247,7 @@
             </div>
         </div>
         <div style="clear: both;"></div>
-        <button class="submit-btn">添加</button>
+        <button class="submit-btn" onclick="add_nurse()">添加</button>
     </div>
 </div>
 </div>

@@ -75,15 +75,16 @@ ALTER TABLE
 CREATE TABLE `caregivers`(
     `caregiver_id` VARCHAR(255) NOT NULL,
     `caregiver_name` VARCHAR(255) NOT NULL,
+    `caregiver_age` smallint NOT NULL,
     `caregiver_phone` VARCHAR(255) NOT NULL,
     `caregiver_address` VARCHAR(255) NOT NULL,
-    `hired_date` BIGINT NOT NULL,
-    `caregiver_gender` ENUM('') NOT NULL,
+    `hired_date` DATETIME NOT NULL,
+    `caregiver_gender` Enum('男', '女') NOT NULL,
     `caregiver_email` VARCHAR(255) NOT NULL,
     `caregiver_department` VARCHAR(255) NOT NULL,
     `experience` VARCHAR(255) NOT NULL,
-    `photo` BINARY(16) NOT NULL,
-    `qualification_photo` BINARY(16) NOT NULL
+    `profile_photo` VARCHAR(255) NOT NULL,
+    `qualification_photo` VARCHAR(255) NOT NULL
 );
 ALTER TABLE
     `caregivers` ADD PRIMARY KEY(`caregiver_id`);
