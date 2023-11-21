@@ -96,6 +96,14 @@ CREATE TABLE `elder_health`(
     `heart_rate` INT NOT NULL,
     `water_intake` DOUBLE NOT NULL
 );
+CREATE TABLE `caregiver_tasks`(
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `caregiver_id` VARCHAR(255) NOT NULL,
+    `caregiver_name` VARCHAR(255) NOT NULL,
+    `task` VARCHAR(255) NOT NULL,
+    `task_date` DATETIME NOT NULL,
+    `task_status` ENUM('未完成', '已完成') NOT NULL
+);
 ALTER TABLE
     elder_guardian ADD CONSTRAINT `elder_guardian_elders_id_foreign` FOREIGN KEY(`elder_id`) REFERENCES `elders`(`elder_id`);
 ALTER TABLE

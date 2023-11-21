@@ -50,7 +50,8 @@
         font-size: 15px;
         margin-right: 20px;
     }
-    #add_task{
+
+    #add_task {
         float: right;
         font-size: 15px;
         margin-right: 20px;
@@ -59,29 +60,273 @@
         border: none;
     }
 
+    .content-wrapper {
+        position: relative;
+    }
+
+    .modal {
+        display: none;
+        position: absolute; /* 改为绝对定位 */
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        border-radius: 4px;
+    }
+
+    input[type="date"],
+    input[type="time"],
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 20px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .button {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: #45a049;
+    }
+
+    .close {
+        position: absolute; /* 使用绝对定位 */
+        right: 10px; /* 右边距 */
+        top: 10px; /* 上边距 */
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
 </style>
 <script>
+    function closeAddModify() {
+        document.getElementById("taskAddModal").style.display = "none";
+    }
+
+    function openAddModal() {
+        document.getElementById("taskAddModal").style.display = "block";
+        document.getElementById("taskDate").value = new Date().toISOString().substring(0, 10);
+    }
+
+    function add_task() {
+        let select = document.getElementById('name').value;
+        let id = select.split('-')[0];
+        let name = select.split('-')[1];
+        let date = document.getElementById('taskDate').value;
+        let startTime = document.getElementById('taskStartTime').value;
+        let endTime = document.getElementById('taskEndTime').value;
+        let description = document.getElementById('taskDescription').value;
+        if (startTime && endTime && description) {
+            if (startTime >= endTime) {
+                alert('开始时间不能大于结束时间');
+                return;
+            }
+            $.ajax({
+                url: '/nurse-management/add_task',
+                type: 'POST',
+                data: JSON.stringify({
+                    id: id,
+                    name: name,
+                    date: date + ' ' + startTime + '-' + endTime,
+                    task: description
+                }),
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.success) {
+                        alert('添加成功');
+                        closeAddModify();
+                        updateTasks(name);
+                    } else alert(response.message);
+                },
+                error: function () {
+                    alert('请求失败');
+                }
+            });
+        } else alert('请填写完整信息')
+    }
+
+    function closeDeleteModify() {
+        document.getElementById("taskDeleteModal").style.display = "none";
+    }
+
+    function openDeleteModal(task) {
+        document.getElementById("taskDeleteModal").style.display = "block";
+        document.getElementById("taskDate1").value = task.date.split(' ')[0];
+        document.getElementById("taskStartTime1").value = task.date.split(' ')[1].split('-')[0];
+        document.getElementById("taskEndTime1").value = task.date.split(' ')[1].split('-')[1];
+        document.getElementById("taskDescription1").value = task.name;
+    }
+
+    function delete_task() {
+        let select = document.getElementById('name').value;
+        let id = select.split('-')[0];
+        let name = select.split('-')[1];
+        let date = document.getElementById('taskDate1').value;
+        let startTime = document.getElementById('taskStartTime1').value;
+        let endTime = document.getElementById('taskEndTime1').value;
+        let description = document.getElementById('taskDescription1').value;
+        $.ajax({
+            url: '/nurse-management/delete_task',
+            type: 'POST',
+            data: JSON.stringify({
+                id: id,
+                name: name,
+                date: date + ' ' + startTime + '-' + endTime,
+                task: description
+            }),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.success) {
+                    alert('删除成功');
+                    closeDeleteModify();
+                    updateTasks(name);
+                } else alert(response.message);
+            },
+            error: function () {
+                alert('请求失败');
+            }
+        });
+    }
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var sampleTasks, currentDate = new Date();
+
+    function updateTableWithTasks(currentDate) {
+        $('#task tbody td:not(:first-child)').empty();
+        $('#task tbody td:not(:first-child)').off('click');
+        // 筛选出当前周的任务
+        const startOfWeek = new Date(currentDate);
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6);
+        // 为每个任务分配一个随机颜色
+        let taskColors = {};
+        sampleTasks.forEach(task => {
+            taskColors[task.name] = getRandomColor();
+        });
+        sampleTasks.forEach(task => {
+            const [datePart, timePart] = task.date.split(' ');
+            const [startTime, endTime] = timePart.split('-');
+            const taskDate = new Date(datePart);
+            if (taskDate >= startOfWeek && taskDate <= endOfWeek) {
+                const dayOfWeek = taskDate.getDay() || 7; // 将周日作为一周的最后一天
+                const startHour = parseInt(startTime.split(':')[0]);
+                let endHour = parseInt(endTime.split(':')[0]);
+                if (startHour === endHour) endHour++;
+                for (let hour = startHour; hour < endHour; hour++) {
+                    const row = $('#task tbody tr').eq(hour);
+                    const cell = row.find('td').eq(dayOfWeek);
+                    // 创建一个新的元素来表示任务
+                    const taskElement = $('<span>').text(task.name + ' (' + task.status + ')');
+                    taskElement.css('color', taskColors[task.name]);
+                    if (cell.children().length > 0) {
+                        cell.append('<br>'); // 使用 '<br>' 作为 HTML 中的换行符
+                    }
+                    taskElement.on('click', () => {
+                        console.log('点击的任务信息:', task);
+                        openDeleteModal(task);
+                    });
+                    cell.append(taskElement);
+                }
+            }
+        });
+    }
+
+    function updateTasks(name) {
+        $.ajax({
+            url: '/nurse-management/get_tasks',
+            type: 'POST',
+            data: JSON.stringify({name: name}),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.success) {
+                    sampleTasks = response.tasks;
+                    updateTableWithTasks(currentDate);
+                } else alert(response.message);
+            },
+            error: function () {
+                alert('请求失败');
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        currentDate = new Date();
+        var tableBody = $('#task tbody');
+        for (var i = 0; i < 24; i++) {
+            var time = i.toString().padStart(2, '0') + ':00'; // 格式化时间
+            var row = $('<tr>');
+            $('<td>').text(time).appendTo(row); // 添加时间到第一列
+            for (var j = 0; j < 7; j++) {
+                $('<td>').text('').appendTo(row); // 添加空白单元格
+            }
+            row.appendTo(tableBody);
+        }
+        let name = document.getElementById('name').value;
+        updateTasks(name);
         const prevWeekBtn = document.getElementById('prevWeek');
         const nextWeekBtn = document.getElementById('nextWeek');
-        const monthYearSpan = document.getElementById('monthYear');
-
-        let currentDate = new Date();
 
         function updateMonthYear() {
-            monthYearSpan.textContent = currentDate.toLocaleDateString('zh-cn', {month: 'long', year: 'numeric', day: 'numeric'});
+            document.getElementById('monthYear').textContent = currentDate.toLocaleDateString('zh-cn', {
+                month: 'long',
+                year: 'numeric',
+                day: 'numeric'
+            });
         }
 
         prevWeekBtn.addEventListener('click', () => {
             currentDate.setDate(currentDate.getDate() - 7);
             updateMonthYear();
+            updateTableWithTasks(currentDate);
         });
-
         nextWeekBtn.addEventListener('click', () => {
             currentDate.setDate(currentDate.getDate() + 7);
             updateMonthYear();
+            updateTableWithTasks(currentDate);
         });
         updateMonthYear();
+        const selectElement = document.getElementById('name');
+        selectElement.addEventListener('change', () => {
+            const selectedValue = selectElement.value;
+            currentDate = new Date();
+            updateMonthYear();
+            updateTasks(selectedValue);
+        });
     });
 
 </script>
@@ -92,11 +337,35 @@
         <span id="monthYear"></span>
         <button id="nextWeek">&gt;</button>
         <select id="name" style="width: 100px">
-            <option>张三</option>
-            <option>李四</option>
-            <option>王五</option>
+            {% for nurse in nurses %}
+            <option>{{ nurse }}</option>
+            {% endfor %}
         </select>
-        <button id="add_task">添加任务</button>
+        <button id="add_task" onclick="openAddModal()">添加任务</button>
+    </div>
+    <div id="taskAddModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddModify()">&times;</span>
+            <h2>添加任务</h2>
+            <label for="taskDate">日期：</label><input type="date" id="taskDate" required>
+            <label for="taskStartTime">开始时间：</label><input type="time" id="taskStartTime" required>
+            <label for="taskEndTime">结束时间：</label><input type="time" id="taskEndTime" required>
+            <label for="taskDescription">任务描述：</label><input type="text" id="taskDescription" required><br><br>
+            <button class="button" onclick="add_task()">确认添加
+            </button>
+        </div>
+    </div>
+    <div id="taskDeleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModify()">&times;</span>
+            <h2>删除任务</h2>
+            <label for="taskDate1">日期：</label><input type="date" id="taskDate1" readonly>
+            <label for="taskStartTime1">开始时间：</label><input type="time" id="taskStartTime1" readonly>
+            <label for="taskEndTime1">结束时间：</label><input type="time" id="taskEndTime1" readonly>
+            <label for="taskDescription1">任务描述：</label><input type="text" id="taskDescription1" readonly><br><br>
+            <button class="button" onclick="delete_task()">确认删除
+            </button>
+        </div>
     </div>
     <table id="task">
         <thead>
@@ -115,16 +384,7 @@
     </table>
     <script>
         $(document).ready(function () {
-            var tableBody = $('#task tbody');
-            for (var i = 0; i < 24; i++) {
-                var time = i.toString().padStart(2, '0') + ':00'; // 格式化时间
-                var row = $('<tr>');
-                $('<td>').text(time).appendTo(row); // 添加时间到第一列
-                for (var j = 0; j < 7; j++) {
-                    $('<td>').text('').appendTo(row); // 添加空白单元格
-                }
-                row.appendTo(tableBody);
-            }
+
         });
     </script>
 </div>
