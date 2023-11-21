@@ -40,7 +40,8 @@ def get_tasks():
     tasks = [
         {'name': '任务1', 'date': '2023-11-21 08:03-08:10', 'status': '未完成'},
         {'name': '任务2', 'date': '2023-11-22 10:20-12:00', 'status': '未完成'},
-        {'name': '任务3', 'date': '2023-11-28 15:00-17:00', 'status': '已完成'}
+        {'name': '任务3', 'date': '2023-11-28 15:00-17:00', 'status': '已完成'},
+        {'name': '任务4', 'date': '2023-11-21 08:20-08:40', 'status': '已完成'}
     ]
     return jsonify({'success': True, 'message': '获取成功', 'tasks': tasks}), 200, {'ContentType': 'application/json'}
 
