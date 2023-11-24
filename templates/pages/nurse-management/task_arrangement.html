@@ -266,11 +266,16 @@
         });
     }
 
-    function updateTasks(name) {
+    function updateTasks(id_name) {
+        let id = id_name.split('-')[0];
+        let name = id_name.split('-')[1];
         $.ajax({
             url: '/nurse-management/get_tasks',
             type: 'POST',
-            data: JSON.stringify({name: name}),
+            data: JSON.stringify({
+                id: id,
+                name: name
+            }),
             contentType: 'application/json',
             success: function (response) {
                 if (response.success) {
@@ -382,10 +387,5 @@
         </thead>
         <tbody></tbody>
     </table>
-    <script>
-        $(document).ready(function () {
-
-        });
-    </script>
 </div>
 {% endblock content%}

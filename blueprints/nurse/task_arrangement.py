@@ -37,6 +37,9 @@ def task_arrangement():
 @nurse_bp.route('/get_tasks', methods=['POST'])
 @login_required
 def get_tasks():
+    data = request.get_json()
+    id = data['id']
+    name = data['name']
     tasks = [
         {'name': '任务1', 'date': '2023-11-21 08:03-08:10', 'status': '未完成'},
         {'name': '任务2', 'date': '2023-11-22 10:20-12:00', 'status': '未完成'},
@@ -50,6 +53,10 @@ def get_tasks():
 @login_required
 def add_task():
     data = request.get_json()
+    id = data['id']
+    name = data['name']
+    task = data['task']
+    date = data['date']
     return jsonify({'success': True, 'message': '添加成功'}), 200, {'ContentType': 'application/json'}
 
 
@@ -57,4 +64,8 @@ def add_task():
 @login_required
 def delete_task():
     data = request.get_json()
+    id = data['id']
+    name = data['name']
+    task = data['task']
+    date = data['date']
     return jsonify({'success': True, 'message': '删除成功'}), 200, {'ContentType': 'application/json'}
