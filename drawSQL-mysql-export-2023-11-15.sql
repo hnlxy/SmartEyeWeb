@@ -1,4 +1,4 @@
-CREATE DATABASE smart_eye;
+# CREATE DATABASE smart_eye;
 USE smart_eye;
 CREATE TABLE `admins`(
     `username` varchar(32) primary key not null,
