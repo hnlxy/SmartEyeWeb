@@ -1,7 +1,6 @@
 from flask import render_template, Flask, session, redirect, request, jsonify
 from factory import create_app
 from flask_login import LoginManager, login_required
-
 from settings import DevelopmentConfig
 
 app = create_app()

@@ -189,29 +189,48 @@
         evt.currentTarget.className += " active";
     }
 
-    // 在文档加载后默认打开第一个标签
-    document.addEventListener("DOMContentLoaded", function () {
-        // 手动触发经历标签的点击事件
-        document.getElementById("defaultOpen").click();
-    });
-
-</script>
-<script>
-    const loanTypes = [
-        {name: '王奶奶', room: '201'},
-        {name: '刘奶奶', room: '202'},
-        {name: '李奶奶', room: '203'},
-        {name: '陈奶奶', room: '204'},
-        {name: '张奶奶', room: '205'},
-        {name: '赵奶奶', room: '206'},
-        {name: '孙奶奶', room: '207'},
-        {name: '周奶奶', room: '208'},
-        {name: '钱奶奶', room: '209'},
-        {name: '吴奶奶', room: '210'},
-    ];
-
+    var loanTypes, reviews;
     let currentIndex = 0;
     const maxVisibleButtons = 6;
+    const maxVisibleReviews = 2;
+
+    function get_elderly() {
+        let id = document.getElementById('id_name').innerText.split('-')[0];
+        let name = document.getElementById('id_name').innerText.split('-')[1];
+        $.ajax({
+            url: '/nurse-management/get_elderly',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                id: id,
+                name: name
+            }),
+            success: function (response) {
+                if (response.success) {
+                    loanTypes = response.care_elderly;
+                    generateButtons();
+                }
+            },
+            error: function () {
+                alert('请求失败')
+            }
+        });
+    }
+
+    function get_nurses() {
+        $.ajax({
+            url: '/nurse-management/get_nurses',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({}),
+            success: function (response) {
+                if (response.success) {
+                    reviews = response.nurses;
+                    setupCarousel();
+                }
+            },
+        });
+    }
 
     // 动态生成按钮并插入到.buttons容器中
     function generateButtons() {
@@ -237,52 +256,47 @@
         generateButtons();
     }
 
-    document.addEventListener('DOMContentLoaded', generateButtons);
-</script>
-<script>
-    const reviews = [
-        {
-            name: 'William Oliver',
-            text: 'Excellent visit. This was for a second opinion and an attempt to see.',
-            image: '/static/assets/images/faces/face1.jpg'
-        },
-        {
-            name: 'Benjamin',
-            text: 'Great service and attention to detail.',
-            image: '/static/assets/images/faces/face2.jpg'
-        },
-        {
-            name: 'Benjamin',
-            text: 'Great service and attention to detail.',
-            image: '/static/assets/images/faces/face3.jpg'
-        },
-        {
-            name: 'William Oliver',
-            text: 'Excellent visit. This was for a second opinion and an attempt to see.',
-            image: '/static/assets/images/faces/face4.jpg'
-        },
-    ];
-
-    const maxVisibleReviews = 2;
+    function update_nurse(info) {
+        document.getElementById('id_name').innerText = info.id_name;
+        document.getElementById('experience').innerText = info.experience;
+        document.getElementById('skills').innerText = info.skills;
+        document.getElementById('contact').innerText = info.contact;
+        document.getElementById('img').src = info.image;
+        get_elderly();
+        document.getElementById("defaultOpen").click();
+    }
 
     function setupCarousel() {
         const slidesContainer = document.querySelector('.carousel-slides');
-        slidesContainer.innerHTML = '';  // Clear existing slides
+        slidesContainer.innerHTML = '';
         for (let i = 0; i < maxVisibleReviews; i++) {
             let reviewIndex = currentIndex + i;
             if (reviewIndex < reviews.length) {
                 const review = reviews[reviewIndex];
                 const slide = document.createElement('div');
                 slide.className = 'slide';
-                slide.innerHTML = `
-                    <div class="slide-nurse">
-                        <img src="${review.image}" alt="${review.name}" style="border-radius: 10px; width: 100px; height: 100px"/>
-                        <div class="slide-text" style="margin-left: 20px">
-                            <h3>${review.name}</h3>
-                            <p>${review.text}</p>
-                        </div>
-                    </div>
-                `;
+                // 创建img元素
+                const img = document.createElement('img');
+                img.src = review.image;
+                img.alt = review.id_name;
+                img.style = 'border-radius: 10px; width: 100px; height: 100px';
+                // 创建包含文本的div元素
+                const textDiv = document.createElement('div');
+                textDiv.className = 'slide-text';
+                textDiv.style = 'margin-left: 20px';
+                textDiv.innerHTML = `<h3>${review.id_name}</h3><p>${review.experience}</p>`;
+                // 将img和文本div添加到slide-nurse div中
+                const nurseDiv = document.createElement('div');
+                nurseDiv.className = 'slide-nurse';
+                nurseDiv.appendChild(img);
+                nurseDiv.appendChild(textDiv);
+                nurseDiv.addEventListener('click', function () {
+                    update_nurse(review);
+                });
+                // 将整个slide-nurse div添加到slide中
+                slide.appendChild(nurseDiv);
+
+                // 将slide添加到幻灯片容器中
                 slidesContainer.appendChild(slide);
             }
         }
@@ -297,8 +311,11 @@
         setupCarousel();
     }
 
-    document.addEventListener('DOMContentLoaded', setupCarousel);
-
+    document.addEventListener('DOMContentLoaded', function () {
+        get_elderly();
+        document.getElementById("defaultOpen").click();
+        get_nurses();
+    });
 </script>
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">护工信息</div>
@@ -306,23 +323,23 @@
         <div class="introduction">
             <div class="nurse">
                 <div class="picture">
-                    <img src="/static/assets/images/faces/face1.jpg" alt="头像照">
+                    <img src="{{ image }}" id="img" alt="头像照">
                 </div>
-                <div class="name">张三</div>
+                <div class="name" id="id_name">{{ id_name }}</div>
             </div>
             <div class="tabs">
-                <button class="tab" id="defaultOpen" onclick="openTab(event, 'Experience')">经历</button>
-                <button class="tab" onclick="openTab(event, 'Skills')">技能</button>
-                <button class="tab" onclick="openTab(event, 'Contact')">联系方式</button>
+                <button class="tab" id="defaultOpen" onclick="openTab(event, 'experience')">经历</button>
+                <button class="tab" onclick="openTab(event, 'skills')">能力</button>
+                <button class="tab" onclick="openTab(event, 'contact')">联系方式</button>
             </div>
-            <div id="Experience" class="tabcontent">
-                经历tab
+            <div id="experience" class="tabcontent">
+                {{ experience }}
             </div>
-            <div id="Skills" class="tabcontent">
-                技能tab
+            <div id="skills" class="tabcontent">
+                {{ skills }}
             </div>
-            <div id="Contact" class="tabcontent">
-                联系方式tab
+            <div id="contact" class="tabcontent">
+                {{ contact }}
             </div>
         </div>
         <div class="care-elderly">
