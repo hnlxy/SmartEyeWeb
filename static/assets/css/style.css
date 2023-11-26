@@ -14107,7 +14107,7 @@ dl {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 70px);
-  background: #ffffff;
+  background: #2F3F56;
   font-family: "ubuntu-regular", sans-serif;
   padding: 0;
   width: 260px;
@@ -14178,7 +14178,7 @@ dl {
                 margin-left: 0;
                 margin-right: .25rem; }
         .sidebar .nav .nav-item .nav-link .menu-title {
-          color: inherit;
+          color: white;
           display: inline-block;
           font-size: 0.875rem;
           line-height: 1;
