@@ -1,2 +1,49 @@
 {% extends 'base.html' %}
 {% block title %}子女权限{% endblock title %}
+{% block content%}
+
+
+<div class="content-wrapper">
+    <div style="font-size: 25px; margin-bottom: 15px">子女权限</div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>序号</th>
+                            <th>用户姓名</th>
+                            <th>设备ID</th>
+                            <th>手机号码</th>
+                            <th>在线状态</th>
+                            <th>在床状态</th>
+                            <th>更新时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results%}
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="checkItem" id="{{ result[0] +'--'+ result[1] }}">
+                            </td>
+                            <td>{{ result[0] }}</td>
+                            <td>{{ result[1] }}</td>
+                            <td>{{ result[2] }}</td>
+                            <td>{{ result[3] }}</td>
+                            <td>{{ result[4] }}</td>
+                            <td>{{ result[5] }}</td>
+                            <td>{{ result[6] }}</td>
+                            <td>{{ result[7] }}</td>
+                            <td>{{ result[8] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

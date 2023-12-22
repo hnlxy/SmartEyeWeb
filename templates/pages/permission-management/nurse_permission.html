@@ -1,2 +1,53 @@
 {% extends 'base.html' %}
 {% block title %}护工权限{% endblock title %}
+{% block content%}
+
+
+<div class="content-wrapper">
+    <div style="font-size: 25px; margin-bottom: 15px">护工权限</div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>序号</th>
+                            <th>老人姓名</th>
+                            <th>平均呼吸</th>
+                            <th>平均心率</th>
+                            <th>上床时间</th>
+                            <th>入睡时间</th>
+                            <th>起床时间</th>
+                            <th>睡眠时长</th>
+                            <th>睡眠等级</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results%}
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="checkItem" id="{{ result[0] +'--'+ result[1] }}">
+                            </td>
+                            <td>{{ result[0] }}</td>
+                            <td>{{ result[1] }}</td>
+                            <td>{{ result[2] }}</td>
+                            <td>{{ result[3] }}</td>
+                            <td>{{ result[4] }}</td>
+                            <td>{{ result[5] }}</td>
+                            <td>{{ result[6] }}</td>
+                            <td>{{ result[7] }}</td>
+                            <td>{{ result[8] }}</td>
+                            <td>{{ result[9] }}</td>
+                            <td>{{ result[10] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -20,7 +20,8 @@
 
     .modal {
         display: none;
-        position: absolute; /* 改为绝对定位 */
+        position: absolute;
+        /* 改为绝对定位 */
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -41,9 +42,12 @@
     }
 
     .close {
-        position: absolute; /* 使用绝对定位 */
-        right: 10px; /* 右边距 */
-        top: 10px; /* 上边距 */
+        position: absolute;
+        /* 使用绝对定位 */
+        right: 10px;
+        /* 右边距 */
+        top: 10px;
+        /* 上边距 */
         color: #aaa;
         font-size: 28px;
         font-weight: bold;
@@ -89,38 +93,38 @@
     }
 </script>
 <div class="content-wrapper">
-    <div style="font-size: 25px; margin-bottom: 15px">护工管理</div>
+    <div style="font-size: 25px; margin-bottom: 15px">护工成员</div>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>护工姓名</th>
-                        <th>年龄</th>
-                        <th>性别</th>
-                        <th>部门</th>
-                        <th>电话号码</th>
-                        <th>地址</th>
-                    </tr>
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>护工姓名</th>
+                            <th>年龄</th>
+                            <th>性别</th>
+                            <th>部门</th>
+                            <th>电话号码</th>
+                            <th>地址</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for result in results%}
-                    <tr>
-                        <td>
-                            <input type="checkbox" class="checkItem" id="{{ result[0] +'--'+ result[1] }}">
-                        </td>
-                        <td>{{ result[0] }}</td>
-                        <td>{{ result[1] }}</td>
-                        <td>{{ result[2] }}</td>
-                        <td>{{ result[3] }}</td>
-                        <td>{{ result[4] }}</td>
-                        <td>{{ result[5] }}</td>
-                        <td>{{ result[6] }}</td>
-                    </tr>
-                    {% endfor %}
+                        {% for result in results%}
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="checkItem" id="{{ result[0] +'--'+ result[1] }}">
+                            </td>
+                            <td>{{ result[0] }}</td>
+                            <td>{{ result[1] }}</td>
+                            <td>{{ result[2] }}</td>
+                            <td>{{ result[3] }}</td>
+                            <td>{{ result[4] }}</td>
+                            <td>{{ result[5] }}</td>
+                            <td>{{ result[6] }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -149,16 +153,16 @@
                     {% for p in range(1, total + 1) %}
                     {% if p == page %}
                     <li class="page-item active"><a class="page-link"
-                                                    href="{{ url_for ('nurse.nurse_member', page=p) }}">{{ p }}</a></li>
+                            href="{{ url_for ('nurse.nurse_member', page=p) }}">{{ p }}</a></li>
                     {% else %}
                     <li class="page-item"><a class="page-link" href="{{ url_for ('nurse.nurse_member', page=p) }}">{{ p
-                        }}</a></li>
+                            }}</a></li>
                     {% endif %}
                     {% endfor %}
                     <li class="page-item">
-                        {% if page < total %}
-                        <a class="page-link" href="{{ url_for ('nurse.nurse_member', page=page+1) }}">下一页</a>
-                        {% endif %}
+                        {% if page < total %} <a class="page-link"
+                            href="{{ url_for ('nurse.nurse_member', page=page+1) }}">下一页</a>
+                            {% endif %}
                     </li>
                 </ul>
             </nav>
