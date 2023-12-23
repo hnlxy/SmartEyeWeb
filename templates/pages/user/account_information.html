@@ -3,13 +3,19 @@
 {% block content%}
 
 <style>
+    /* 去除所有a标签下划线 */
+    a {
+        text-decoration: none;
+    }
+
     /* 设置外层wrapper宽高、背景验证、水平居中、相对定位 */
     .wrapper {
         position: relative;
         width: 100%;
-        height: 100%;
-        background-color: white;
+        height: 700px;
+        background-color: #d3cecd;
         margin: 0 auto;
+        border-radius: 20px;
     }
 
     /* 设置内层div相对于父级绝对定位，默认隐藏 */
@@ -19,15 +25,27 @@
         top: 50px;
     }
 
-    /* 设置label宽高、行内块、文本居中、行高、字体大小、字体颜色 */
-    label {
-        width: 20%;
+    /* 设置menu宽高、行内块、文本居中、行高、字体大小、字体颜色 */
+    .menu2 {
+        width: 15%;
         height: 50px;
         display: inline-block;
         text-align: center;
         line-height: 50px;
         font-size: 18px;
-        color: black;
+        color: white;
+        /* border-top-left-radius: 20px; */
+    }
+
+    .menu1 {
+        width: 15%;
+        height: 50px;
+        display: inline-block;
+        text-align: center;
+        line-height: 50px;
+        font-size: 18px;
+        color: white;
+        border-top-left-radius: 20px;
     }
 
     /* 默认所有radio隐藏 */
@@ -44,27 +62,171 @@
     input[type="radio"]:checked+label {
         background-color: #FFBB98;
     }
+
+    .information {
+        width: 100%;
+        font-size: 20px;
+
+        hr {
+            margin-top: 0;
+        }
+
+        .information-header {
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .information-footer {
+            margin-top: 5px;
+        }
+
+        .menu-information {
+            display: block;
+            margin-right: 10px;
+        }
+    }
+
+    .privacy {
+        width: 100%;
+
+        hr {
+            margin-top: 0;
+        }
+    }
+
+    .password {
+        width: 100%;
+
+        hr {
+            margin-top: 0;
+        }
+    }
 </style>
 
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">我的账户</div>
     <div class="wrapper">
         <input type="radio" name="gender" id="bro1" checked />
-        <label for="bro1">个人信息</label>
-        <div>
-
+        <label for="bro1" class="menu1">个人信息</label>
+        <!-- 个人信息菜单 -->
+        <div class="information">
+            <hr>
+            <center>
+                <p class="information-header">修改个人信息（*为必填项）</p>
+            </center>
+            <center>
+                <form>
+                    <table>
+                        <tr>
+                            <td class="menu-information">*用户名</td>
+                            <td>
+                                <input type="text" name="用户名" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*性别</td>
+                            <td class="single">
+                                <input type="radio" name="sex" id="man">
+                                <label for="man">男</label>
+                                <input type="radio" name="sex" id="woman">
+                                <label for="woman">女</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*出生日期</td>
+                            <td>
+                                <input type="text" name="出生日期" size="5" />年
+                                <input type="text" name="出生日期" size="5" />月
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*参加工作年份</td>
+                            <td>
+                                <select name="参加工作年份">
+                                    <option value="无工作经验">无工作经验</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*户口所在地</td>
+                            <td>
+                                <select name="户口所在地">
+                                    <option value="河北">河北</option>
+                                    <option value="河南">河南</option>
+                                    <option value="山东">山东</option>
+                                    <option value="山西">山西</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*现居住城市</td>
+                            <td>
+                                <select name="现居住城市">
+                                    <option value="保定">保定</option>
+                                    <option value="北京">北京</option>
+                                    <option value="天津">天津</option>
+                                    <option value="上海">上海</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*联系方式</td>
+                            <td>
+                                <input type="text" name="联系方式" />
+                                <a href="#">修改</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">*电子邮箱</td>
+                            <td>
+                                <input type="text" name="电子邮箱" />
+                                <a href="#">修改</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">婚姻状况</td>
+                            <td class="single">
+                                <input type="radio" name="marriage" id="yes">
+                                <label for="yes">未婚</label>
+                                <input type="radio" name="marriage" id="no">
+                                <label for="no">已婚</label>
+                                <input type="radio" name="marriage" id="dis">
+                                <label for="dis">离异</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menu-information">国籍</td>
+                            <td>
+                                <select name="国籍">
+                                    <option value="中国">中国</option>
+                                    <option value="美国">美国</option>
+                                    <option value="英国">英国</option>
+                                    <option value="法国">法国</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <center class="information-footer">
+                        <input type="submit" name="保存" value="保存">
+                        <a href="/index.html">返回</a>
+                    </center>
+                </form>
+            </center>
         </div>
 
         <input type="radio" name="gender" id="bro2" />
-        <label for="bro2">修改密码</label>
-        <div>
-
+        <label for="bro2" class="menu2">修改密码</label>
+        <div class="password">
+            <hr>
         </div>
 
         <input type="radio" name="gender" id="bro3" />
-        <label for="bro3">隐私设置</label>
-        <div>
-
+        <label for="bro3" class="menu2">隐私设置</label>
+        <div class="privacy">
+            <hr>
         </div>
     </div>
 </div>
