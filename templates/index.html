@@ -2,72 +2,81 @@
 {% block title %}智眼守护{% endblock title %}
 {% block content %}
 <style>
-    /* styles.css */  
-    .dashboard-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: stretch;
-      }
-    
-    .card-container {
-        flex-basis: 48%; /* 或者根据实际情况调整，以保证两个卡片一行 */
-         display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px; /* 卡片容器底部间隙 */
-    }
+  /* styles.css */
+  .dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+  }
 
-    .dashboard-left {
-        width: 65%; /* 将宽度设置为屏幕宽度的2/3 */
-        margin-left: 0; /* 靠左对齐，左边距为0 */
-        margin-right: auto; /* 右边距设置为auto，保持内容块向左对齐 */
-        background: white;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  .card-container {
+    flex-basis: 48%;
+    /* 或者根据实际情况调整，以保证两个卡片一行 */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* 卡片容器底部间隙 */
+  }
 
-    .dashboard-right {
-        width: 33%; /* 将宽度设置为屏幕宽度的1/3 */
-        margin-left: auto; /* 靠左对齐，左边距为0 */
-        margin-right: 0; /* 右边距设置为auto，保持内容块向左对齐 */
-        background: white;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
+  .dashboard-left {
+    width: 65%;
+    /* 将宽度设置为屏幕宽度的2/3 */
+    margin-left: 0;
+    /* 靠左对齐，左边距为0 */
+    margin-right: auto;
+    /* 右边距设置为auto，保持内容块向左对齐 */
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-right {
+    width: 33%;
+    /* 将宽度设置为屏幕宽度的1/3 */
+    margin-left: auto;
+    /* 靠左对齐，左边距为0 */
+    margin-right: 0;
+    /* 右边距设置为auto，保持内容块向左对齐 */
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
 
   .header h1 {
     color: #333;
   }
-  
+
   .stats {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
-  
+
   .card {
     flex-grow: 1;
-    margin: 10px; /* 卡片之间和边框间的间隙 */
+    margin: 10px;
+    /* 卡片之间和边框间的间隙 */
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
-  
+
   .icon-bg {
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .pink-bg {
     background: #FFC0CB;
   }
-  
+
   .yellow-bg {
     background: #FFFFE0;
   }
@@ -76,27 +85,28 @@
     background: #E6E6FA;
   }
 
-  .taozi-bg{
+  .taozi-bg {
     background: #FFE5B4;
   }
 
   .blue-bg {
     background: #B0E0E6;
   }
-  
-  .green-bg{
+
+  .green-bg {
     background: #90EE90;
   }
 
-  .banana-bg{
+  .banana-bg {
     background: #FFD700;
   }
 
-  .grey-bg{
+  .grey-bg {
     background: #DCDCDC;
   }
+
   /* ... Other background color styles ... */
-  
+
   .card .content {
     padding: 15px;
     text-align: center;
@@ -104,310 +114,324 @@
     flex-direction: column;
     justify-content: center;
   }
-  
+
   .card .content p {
     margin: 0;
     color: #666;
     font-size: 16px;
   }
-  
+
   .content span {
     font-weight: bold;
     margin-bottom: 5px;
   }
+
   .card .content h2 {
     margin: 0;
     color: #333;
   }
 
   .form-group {
-    margin-bottom: 10px; /* Add space between form groups */
+    margin-bottom: 10px;
+    /* Add space between form groups */
   }
 
   .form-label {
-    display: block; /* Make the label display as block */
-    margin-bottom: 5px; /* Add some space between the label and the form controls */
-    font-weight: bold; /* Make the label text bold */
+    display: block;
+    /* Make the label display as block */
+    margin-bottom: 5px;
+    /* Add some space between the label and the form controls */
+    font-weight: bold;
+    /* Make the label text bold */
   }
 
   .form-controls {
-    display: flex; /* Use flexbox for layout */
-    gap: 10px; /* Add space between controls */
+    display: flex;
+    /* Use flexbox for layout */
+    gap: 10px;
+    /* Add space between controls */
   }
 
   .form-control {
-    background-color: #E6F7FF; /* Light blue background */
-    border: 1px solid #91D5FF; /* Blue border */
-    border-radius: 4px; /* Rounded corners */
-    padding: 5px 10px; /* Padding inside the controls */
-    text-align: center; /* Center the text */
+    background-color: #E6F7FF;
+    /* Light blue background */
+    border: 1px solid #91D5FF;
+    /* Blue border */
+    border-radius: 4px;
+    /* Rounded corners */
+    padding: 5px 10px;
+    /* Padding inside the controls */
+    text-align: center;
+    /* Center the text */
   }
+
   .leaderboard {
     width: 300px;
     margin: auto;
   }
-  
+
   .leaderboard-item {
     background: #fff;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .star-rating {
-    color: #FFD700; /* Gold color */
+    color: #FFD700;
+    /* Gold color */
   }
-  
+
   .reviews {
     color: #999;
   }
-  
 </style>
 <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="content-wrapper">
-    <div class="header">
-        <h1>欢迎!</h1>
-    </div>
-    
-    <!-- Stats section -->
-    <div class="stats">
-        <!-- Single stat card -->
-        <div class="card">
-            <div class="icon-bg taozi-bg">
-                <i class="fa fa-user-md" style="font-size:48px;"></i>
-                <div class="content" >
-                    <h2>长者管理</h2>
-                        <p>在住人数</p>
-                        <span>156人</span>
-                        <p>剩余床位</p>
-                        <span>18张</span>
-                </div>
-            </div>
-        </div>
+  <div class="header">
+    <h1>欢迎!</h1>
+  </div>
 
-        <div class="card">
-            <div class="icon-bg purple-bg">
-                <i class="fa fa-medkit" style="font-size:48px;"></i>
-                <div class="content">
-                    <h2>护工管理</h2>
-                        <p>护工人数</p>
-                        <span>56人</span>
-                        <p>请假人数</p>
-                        <span>18人</span>
-                </div>
-            </div>
+  <!-- Stats section -->
+  <div class="stats">
+    <!-- Single stat card -->
+    <div class="card">
+      <div class="icon-bg taozi-bg">
+        <i class="fa fa-user-md" style="font-size:48px;"></i>
+        <div class="content">
+          <h2>长者管理</h2>
+          <p>在住人数</p>
+          <span>156人</span>
+          <p>剩余床位</p>
+          <span>18张</span>
         </div>
-        
-        <div class="card">
-            <div class="icon-bg yellow-bg">
-                <i class="fa fa-yen" style="font-size:48px;"></i>
-                <div class="content">
-                    <h2>账户管理</h2>
-                        <p>余额</p>
-                        <span>2万</span>
-                        <p>押金</p>
-                        <span>0.5万</span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="card">
-            <div class="icon-bg pink-bg">
-                <i class="fa fa-list-alt" style="font-size:48px;"></i>
-                <div class="content">
-                    <h2>考勤统计</h2>
-                        <p>今日签到</p>
-                        <span>30人</span>
-                        <p>累计签到</p>
-                        <span>6000次</span>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div class="dashboard-container">
-            <div class="dashboard-left">
-                <h2>房态分布</h2>
-                <div class="card-container">
-                    <div class="card">
-                        <div class="icon-bg blue-bg">
-                            <i class="fa fa-home" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>房间</h4>
-                                    <span>20</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-bg pink-bg">
-                            <i class="fa fa-bed" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>床位</h4>
-                                    <span>18</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-bg purple-bg">
-                            <i class="fa fa-spinner" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>试住</h4>
-                                    <span>5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="icon-bg banana-bg">
-                            <i class="fa fa-paperclip" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>预约</h4>
-                                    <span>5</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-bg green-bg">
-                            <i class="fa fa-circle" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>在住</h4>
-                                    <span>10</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-bg grey-bg">
-                            <i class="fa fa-circle-o" style="font-size:48px;"></i>
-                            <div class="content">
-                                <h4>空床</h4>
-                                    <span>5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <span class="form-label">楼层数目：</span>
-                    <div class="form-controls">
-                      <label class="form-control">全部</label>
-                      <label class="form-control">一层</label>
-                      <label class="form-control">二层</label>
-                      <label class="form-control">三层</label>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <span class="form-label">房间类型：</span>
-                    <div class="form-controls">
-                      <label class="form-control">全部</label>
-                      <label class="form-control">单人</label>
-                      <label class="form-control">双人</label>
-                      <label class="form-control">三人</label>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <span class="form-label">房间状态：</span>
-                    <div class="form-controls">
-                      <label class="form-control">全部</label>
-                      <label class="form-control">在住</label>
-                      <label class="form-control">预约</label>
-                      <label class="form-control">空房</label>
-                    </div>
-                  </div>
-                  
-            </div>
-
-            <div class="dashboard-right">
-                <h2>级别分布</h2>
-                <canvas id="myDonutChart"></canvas>
-                <h2>护工排行榜</h2>
-                <div class="leaderboard">
-                    <div class="leaderboard-item"><div>
-                        <div>王芳</div>
-                            <div class="star-rating">
-                            ★★★★★
-                            </div>
-                </div>
-                      <div class="reviews">315 reviews</div>
-
-            </div>
-            <div class="leaderboard-item">
-                <div>
-                    <div>李丽</div>
-                        <div class="star-rating">
-                        ★★★★
-                        </div>
-                </div>
-              <div class="reviews">345 reviews</div>
-            </div>
-
-            <div class="leaderboard-item">
-                <div>
-                    <div>黄大本</div>
-                        <div class="star-rating">
-                        ★★★★
-                        </div>
-                </div>
-              <div class="reviews">265 reviews</div>
-            </div>
-                
+    <div class="card">
+      <div class="icon-bg purple-bg">
+        <i class="fa fa-medkit" style="font-size:48px;"></i>
+        <div class="content">
+          <h2>护工管理</h2>
+          <p>护工人数</p>
+          <span>56人</span>
+          <p>请假人数</p>
+          <span>18人</span>
         </div>
-        </div>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="icon-bg yellow-bg">
+        <i class="fa fa-yen" style="font-size:48px;"></i>
+        <div class="content">
+          <h2>账户管理</h2>
+          <p>余额</p>
+          <span>2万</span>
+          <p>押金</p>
+          <span>0.5万</span>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-bg pink-bg">
+        <i class="fa fa-list-alt" style="font-size:48px;"></i>
+        <div class="content">
+          <h2>考勤统计</h2>
+          <p>今日签到</p>
+          <span>30人</span>
+          <p>累计签到</p>
+          <span>6000次</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="dashboard-left">
+      <h2>房态分布</h2>
+      <div class="card-container">
+        <div class="card">
+          <div class="icon-bg blue-bg">
+            <i class="fa fa-home" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>房间</h4>
+              <span>20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon-bg pink-bg">
+            <i class="fa fa-bed" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>床位</h4>
+              <span>18</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon-bg purple-bg">
+            <i class="fa fa-spinner" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>试住</h4>
+              <span>5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-container">
+        <div class="card">
+          <div class="icon-bg banana-bg">
+            <i class="fa fa-paperclip" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>预约</h4>
+              <span>5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon-bg green-bg">
+            <i class="fa fa-circle" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>在住</h4>
+              <span>10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon-bg grey-bg">
+            <i class="fa fa-circle-o" style="font-size:48px;"></i>
+            <div class="content">
+              <h4>空床</h4>
+              <span>5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="form-label">楼层数目：</span>
+        <div class="form-controls">
+          <label class="form-control">全部</label>
+          <label class="form-control">一层</label>
+          <label class="form-control">二层</label>
+          <label class="form-control">三层</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="form-label">房间类型：</span>
+        <div class="form-controls">
+          <label class="form-control">全部</label>
+          <label class="form-control">单人</label>
+          <label class="form-control">双人</label>
+          <label class="form-control">三人</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="form-label">房间状态：</span>
+        <div class="form-controls">
+          <label class="form-control">全部</label>
+          <label class="form-control">在住</label>
+          <label class="form-control">预约</label>
+          <label class="form-control">空房</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dashboard-right">
+      <h2>级别分布</h2>
+      <canvas id="myDonutChart"></canvas>
+      <h2>护工排行榜</h2>
+      <div class="leaderboard">
+        <div class="leaderboard-item">
+          <div>
+            <div>王芳</div>
+            <div class="star-rating">
+              ★★★★★
+            </div>
+          </div>
+          <div class="reviews">315 reviews</div>
+
+        </div>
+        <div class="leaderboard-item">
+          <div>
+            <div>李丽</div>
+            <div class="star-rating">
+              ★★★★
+            </div>
+          </div>
+          <div class="reviews">345 reviews</div>
+        </div>
+
+        <div class="leaderboard-item">
+          <div>
+            <div>黄大本</div>
+            <div class="star-rating">
+              ★★★★
+            </div>
+          </div>
+          <div class="reviews">265 reviews</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
 
 <script>
-    // 当文档加载完毕时执行
-    document.addEventListener('DOMContentLoaded', function () {
-      var ctx = document.getElementById('myDonutChart').getContext('2d');
-      var myChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-              labels: ['特级', '一级', '二级', '三级', '四级'],
-              datasets: [{
-                  label: '# of Votes',
-                  data: [12, 19, 3, 5, 2], // 这里是实际数据
-                  backgroundColor: [
-                      'rgba(255, 99, 132, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(153, 102, 255, 0.2)'
-                  ],
-                  borderColor: [
-                      'rgba(255, 99, 132, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)'
-                  ],
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              cutoutPercentage: 50, // 这个值可以调整环形图的厚度
-              legend: {
-                  position: 'bottom', // 这个值设定图例的位置
-              },
-              responsive: true, // 图表的响应式设置
-          }
-      });
+  // 当文档加载完毕时执行
+  document.addEventListener('DOMContentLoaded', function () {
+    var ctx = document.getElementById('myDonutChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['特级', '一级', '二级', '三级', '四级'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2], // 这里是实际数据
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        cutoutPercentage: 50, // 这个值可以调整环形图的厚度
+        legend: {
+          position: 'bottom', // 这个值设定图例的位置
+        },
+        responsive: true, // 图表的响应式设置
+      }
     });
-    </script>
+  });
+</script>
 
 
 {% endblock content %}
