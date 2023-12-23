@@ -1,84 +1,91 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/index">
-          <span class="menu-title">控制面板</span>
-          <i class="mdi mdi-home menu-icon"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#elderly-management" aria-expanded="false" aria-controls="elderly-management">
-          <span class="menu-title">长者管理</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-        </a>
-        <div class="collapse" id="elderly-management">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/elderly-management/elderly-member">成员列表</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/elderly-management/elderly-rights">长者权益</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/elderly-management/add-elderly">添加长者</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#nursing-management" aria-expanded="false" aria-controls="nursing-management">
-          <span class="menu-title">护工管理</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-contacts menu-icon"></i>
-        </a>
-        <div class="collapse" id="nursing-management">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/nurse-management/nurse-member">护工成员</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/nurse-management/nurse-information">护工信息</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/nurse-management/add-nurse">增添护工</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/nurse-management/task-arrangement">任务安排</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#permission-management" aria-expanded="false" aria-controls="permission-management">
-          <span class="menu-title">权限管理</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-        </a>
-        <div class="collapse" id="permission-management">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/permission-management/nurse-permission">护工权限</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/permission-management/child-permission">子女权限</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#cost-management" aria-expanded="false" aria-controls="cost-management">
-          <span class="menu-title">费用管理</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-chart-bar menu-icon"></i>
-        </a>
-        <div class="collapse" id="cost-management">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="/cost-management/analysis-report">分析报告</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/cost-management/bill-management">账单管理</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/system-report/system-report">
-          <span class="menu-title">系统报告</span>
-          <i class="mdi mdi-table-large menu-icon"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/user/account-information">
-          <span class="menu-title">我的账户</span>
-          <i class="mdi mdi-medical-bag menu-icon"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/system-setting/setting-information">
-          <span class="menu-title">系统设置</span>
-          <i class="mdi mdi-medical-bag menu-icon"></i>
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/index">
+                <span class="menu-title">控制面板</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#elderly-management" aria-expanded="false"
+               aria-controls="elderly-management">
+                <span class="menu-title">长者管理</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-human menu-icon"></i><!--icon图标地址 https://materialdesignicons.com/cdn/1.6.50-dev/-->
+            </a>
+            <div class="collapse" id="elderly-management">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/elderly-management/elderly-member">成员列表</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/elderly-management/elderly-rights">长者权益</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/elderly-management/add-elderly">添加长者</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#nursing-management" aria-expanded="false"
+               aria-controls="nursing-management">
+                <span class="menu-title">护工管理</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-hospital menu-icon"></i>
+            </a>
+            <div class="collapse" id="nursing-management">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/nurse-management/nurse-member">护工成员</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nurse-management/nurse-information">护工信息</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/nurse-management/add-nurse">增添护工</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nurse-management/task-arrangement">任务安排</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#permission-management" aria-expanded="false"
+               aria-controls="permission-management">
+                <span class="menu-title">权限管理</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-key menu-icon"></i>
+            </a>
+            <div class="collapse" id="permission-management">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/permission-management/nurse-permission">护工权限</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/permission-management/child-permission">子女权限</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#cost-management" aria-expanded="false"
+               aria-controls="cost-management">
+                <span class="menu-title">费用管理</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-coin menu-icon"></i>
+            </a>
+            <div class="collapse" id="cost-management">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/cost-management/analysis-report">分析报告</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cost-management/bill-management">账单管理</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/system-report/system-report">
+                <span class="menu-title">系统报告</span>
+                <i class="mdi mdi-calendar-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/user/account-information">
+                <span class="menu-title">我的账户</span>
+                <i class="mdi mdi-account menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/system-setting/setting-information">
+                <span class="menu-title">系统设置</span>
+                <i class="mdi mdi-settings menu-icon"></i>
+            </a>
+        </li>
     </ul>
-  </nav>
+</nav>
