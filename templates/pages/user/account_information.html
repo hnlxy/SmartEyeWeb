@@ -63,29 +63,6 @@
         background-color: #FFBB98;
     }
 
-    .information {
-        width: 100%;
-        font-size: 20px;
-
-        hr {
-            margin-top: 0;
-        }
-
-        .information-header {
-            font-weight: bold;
-            font-size: 30px;
-        }
-
-        .information-footer {
-            margin-top: 5px;
-        }
-
-        .menu-information {
-            display: block;
-            margin-right: 10px;
-        }
-    }
-
     .privacy {
         width: 100%;
 
@@ -101,121 +78,88 @@
             margin-top: 0;
         }
     }
-</style>
 
+
+    .information {
+        width: 100%;
+
+
+        .account {
+            margin-left: 40%;
+        }
+
+        .button {
+            margin-left: 6%;
+        }
+
+        h1 {
+            margin-left: 40%;
+        }
+
+        hr {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            display: block;
+        }
+
+    }
+
+    input[type="submit"] {
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    document.getElementById("accountForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // 阻止表单的默认提交行为  
+        var accountName = document.getElementById("accountName").value;
+        var accountBalance = document.getElementById("accountBalance").value;
+        var address = document.getElementById("address").value;
+        var contact = document.getElementById("contact").value;
+        console.log("账户名称:", accountName);
+        console.log("账户余额:", accountBalance);
+        console.log("养老院地址:", address);
+        console.log("联系方式:", contact);
+        // 在这里可以添加更新账户的逻辑，例如发送异步请求到服务器更新数据。  
+    });  
+</script>
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">我的账户</div>
     <div class="wrapper">
         <input type="radio" name="gender" id="bro1" checked />
-        <label for="bro1" class="menu1">个人信息</label>
-        <!-- 个人信息菜单 -->
+        <label for="bro1" class="menu1">养老院账户</label>
         <div class="information">
             <hr>
-            <center>
-                <p class="information-header">修改个人信息（*为必填项）</p>
-            </center>
-            <center>
-                <form>
-                    <table>
-                        <tr>
-                            <td class="menu-information">*用户名</td>
-                            <td>
-                                <input type="text" name="用户名" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*性别</td>
-                            <td class="single">
-                                <input type="radio" name="sex" id="man">
-                                <label for="man">男</label>
-                                <input type="radio" name="sex" id="woman">
-                                <label for="woman">女</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*出生日期</td>
-                            <td>
-                                <input type="text" name="出生日期" size="5" />年
-                                <input type="text" name="出生日期" size="5" />月
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*参加工作年份</td>
-                            <td>
-                                <select name="参加工作年份">
-                                    <option value="无工作经验">无工作经验</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*户口所在地</td>
-                            <td>
-                                <select name="户口所在地">
-                                    <option value="河北">河北</option>
-                                    <option value="河南">河南</option>
-                                    <option value="山东">山东</option>
-                                    <option value="山西">山西</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*现居住城市</td>
-                            <td>
-                                <select name="现居住城市">
-                                    <option value="保定">保定</option>
-                                    <option value="北京">北京</option>
-                                    <option value="天津">天津</option>
-                                    <option value="上海">上海</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*联系方式</td>
-                            <td>
-                                <input type="text" name="联系方式" />
-                                <a href="#">修改</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">*电子邮箱</td>
-                            <td>
-                                <input type="text" name="电子邮箱" />
-                                <a href="#">修改</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">婚姻状况</td>
-                            <td class="single">
-                                <input type="radio" name="marriage" id="yes">
-                                <label for="yes">未婚</label>
-                                <input type="radio" name="marriage" id="no">
-                                <label for="no">已婚</label>
-                                <input type="radio" name="marriage" id="dis">
-                                <label for="dis">离异</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="menu-information">国籍</td>
-                            <td>
-                                <select name="国籍">
-                                    <option value="中国">中国</option>
-                                    <option value="美国">美国</option>
-                                    <option value="英国">英国</option>
-                                    <option value="法国">法国</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    <center class="information-footer">
-                        <input type="submit" name="保存" value="保存">
-                        <a href="/index.html">返回</a>
-                    </center>
-                </form>
-            </center>
+            <h1>养老院账户信息</h1>
+            <form id="accountForm" class="account">
+                <label for="accountName">账户名称:</label>
+                <input type="text" id="accountName" required><br><br>
+
+                <label for="accountBalance">账户余额:</label>
+                <input type="number" id="accountBalance" required><br><br>
+
+                <label for="address">养老院地址:</label>
+                <input type="text" id="address" required><br><br>
+
+                <label for="contact">联系方式:</label>
+                <input type="text" id="contact" required><br><br>
+
+                <input type="submit" value="更新账户" class="button">
+            </form>
         </div>
+
 
         <input type="radio" name="gender" id="bro2" />
         <label for="bro2" class="menu2">修改密码</label>
