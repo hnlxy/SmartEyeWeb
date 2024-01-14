@@ -6,7 +6,7 @@ class BaseConfig(object):
     # 用于连接MySQL数据库的用户名
     USERNAME = "root"
     # 用于连接MySQL数据库的密码
-    PASSWORD = "root"
+    PASSWORD = "123456"
     # 要连接的数据库名
     DATABASE = "smart_eye"
     # 构造MySQL数据库连接 URL

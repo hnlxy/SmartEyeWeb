@@ -13,7 +13,7 @@
         position: relative;
         width: 100%;
         height: 700px;
-        background-color: #d3cecd;
+        background-color: white;
         margin: 0 auto;
         border-radius: 20px;
     }
@@ -32,9 +32,9 @@
         display: inline-block;
         text-align: center;
         line-height: 50px;
-        font-size: 18px;
-        color: white;
-        /* border-top-left-radius: 20px; */
+        font-size: 25px;
+        font-weight: bolder;
+        color: #bea8be;
     }
 
     .menu1 {
@@ -43,9 +43,20 @@
         display: inline-block;
         text-align: center;
         line-height: 50px;
-        font-size: 18px;
-        color: white;
+        font-size: 25px;
+        font-weight: bolder;
+        color: #bea8be;
         border-top-left-radius: 20px;
+    }
+
+    .menu1:hover {
+        background-color: #FFBB98;
+        color: white;
+    }
+
+    .menu2:hover {
+        background-color: #FFBB98;
+        color: white;
     }
 
     /* 默认所有radio隐藏 */
@@ -61,8 +72,10 @@
     /* 被选中的radio下的label背景颜色改为红色 */
     input[type="radio"]:checked+label {
         background-color: #FFBB98;
+        color: white;
     }
 
+    /* 隐私设置界面css */
     .privacy {
         width: 100%;
 
@@ -71,29 +84,69 @@
         }
     }
 
+    /* 修改密码界面css */
     .password {
         width: 100%;
 
         hr {
             margin-top: 0;
         }
-    }
 
-
-    .information {
-        width: 100%;
-
+        .accountForm {
+            float: left;
+            margin-left: 10%;
+            margin-top: 20px;
+        }
 
         .account {
-            margin-left: 40%;
+            font-size: 25px;
+            margin-bottom: 10px;
         }
 
         .button {
-            margin-left: 6%;
+            margin-top: 350px;
+            margin-left: 50%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 20px;
+            display: block;
+            width: 500px;
+            height: 30px;
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+        }
+    }
+
+    /* 养老院账户界面css */
+    .information {
+        width: 100%;
+
+        .accountForm {
+            float: left;
+            margin-left: 10%;
+            margin-top: 20px;
+        }
+
+        .account {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            margin-top: 300px;
+            margin-left: 70%;
         }
 
         h1 {
-            margin-left: 40%;
+            margin-left: 35%;
         }
 
         hr {
@@ -106,13 +159,21 @@
         }
 
         input {
+            margin-bottom: 20px;
             display: block;
+            width: 500px;
+            height: 30px;
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
         }
 
     }
 
     input[type="submit"] {
-        margin-top: 20px;
+        width: 100px;
+        height: 50px;
         background-color: #4CAF50;
         color: white;
         border: none;
@@ -143,21 +204,21 @@
         <div class="information">
             <hr>
             <h1>养老院账户信息</h1>
-            <form id="accountForm" class="account">
-                <label for="accountName">账户名称:</label>
-                <input type="text" id="accountName" required><br><br>
+            <form class="accountForm">
+                <label for="accountName" class="account">账户名称:</label>
+                <input type="text" id="accountName" placeholder="请输入账户名称" required>
 
-                <label for="accountBalance">账户余额:</label>
-                <input type="number" id="accountBalance" required><br><br>
-
-                <label for="address">养老院地址:</label>
-                <input type="text" id="address" required><br><br>
-
-                <label for="contact">联系方式:</label>
-                <input type="text" id="contact" required><br><br>
-
-                <input type="submit" value="更新账户" class="button">
+                <label for="accountBalance" class="account">账户余额:</label>
+                <input type="number" id="accountBalance" placeholder="请输入账户余额" required>
             </form>
+            <form class="accountForm">
+                <label for="address" class="account">养老院地址:</label>
+                <input type="text" id="address" placeholder="请输入养老院地址" required>
+
+                <label for="contact" class="account">联系方式:</label>
+                <input type="text" id="contact" placeholder="请输入联系方式" required>
+            </form>
+            <input type="submit" value="更新账户" class="button">
         </div>
 
 
@@ -165,6 +226,17 @@
         <label for="bro2" class="menu2">修改密码</label>
         <div class="password">
             <hr>
+            <form class="accountForm">
+                <label for="password" class="account">原密码:</label>
+                <input type="text" id="password" placeholder="请输入账户原密码" required>
+
+                <label for="code" class="account">修改密码:</label>
+                <input type="text" id="code" placeholder="请输入修改后的密码" required>
+
+                <label for="confirm" class="account">再次输入进行确认:</label>
+                <input type="text" id="confirm" placeholder="请再次确认您修改后的密码" required>
+            </form>
+            <input type="submit" value="确认更改" class="button">
         </div>
 
         <input type="radio" name="gender" id="bro3" />
