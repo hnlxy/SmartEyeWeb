@@ -205,7 +205,7 @@
                 if (response.success) {
                     alert('删除成功');
                     closeDeleteModify();
-                    updateTasks(name);
+                    updateTasks(id + '-' + name);
                 } else alert(response.message);
             },
             error: function () {
@@ -230,8 +230,10 @@
         $('#task tbody td:not(:first-child)').off('click');
         // 筛选出当前周的任务
         const startOfWeek = new Date(currentDate);
+        startOfWeek.setHours(0, 0, 0, 0);
         startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + 1);
         const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setHours(23, 59, 59, 999);
         endOfWeek.setDate(endOfWeek.getDate() + 6);
         // 为每个任务分配一个随机颜色
         let taskColors = {};

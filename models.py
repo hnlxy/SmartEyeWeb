@@ -133,5 +133,5 @@ class CaregiverTasks(db.Model):
     caregiver_id = Column('caregiver_id', String)
     caregiver_name = Column('caregiver_name', String)
     task = Column('task', String)
-    task_date = Column('task_date', DateTime)
+    task_date = Column('task_date', String)
     task_status = Column('task_status', Enum('未完成', '已完成'))
