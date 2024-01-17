@@ -38,6 +38,7 @@ class Caregiver(db.Model):
     caregiver_gender = Column('caregiver_gender', Enum('男', '女'), nullable=False)  #
     caregiver_email = Column('caregiver_email', String(255), nullable=True)
     caregiver_department = Column('caregiver_department', String(20), nullable=True)
+    skills = Column('skills', String(255), nullable=True)
     experience = Column('experience', String(255), nullable=True)
     profile_photo = Column('profile_photo', String(255), nullable=False)
     qualification_photo = Column('qualification_photo', String(255), nullable=True)

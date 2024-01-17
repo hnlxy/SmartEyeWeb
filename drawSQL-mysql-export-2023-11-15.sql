@@ -82,6 +82,7 @@ CREATE TABLE `caregivers`(
     `caregiver_gender` Enum('男', '女') NOT NULL,
     `caregiver_email` VARCHAR(255) NOT NULL,
     `caregiver_department` VARCHAR(255) NOT NULL,
+    `skills` VARCHAR(255) NOT NULL,
     `experience` VARCHAR(255) NOT NULL,
     `profile_photo` VARCHAR(255) NOT NULL,
     `qualification_photo` VARCHAR(255) NOT NULL

@@ -42,6 +42,7 @@ def add_nurse():
             department = request.form['department']
             email = request.form['email']
             address = request.form['address']
+            skills = request.form['skills']
             experience = request.form['experience']
             path1 = save_picture(profile_picture, nurse_id, nurse_name, 'profile_picture')
             path2 = save_picture(cover_picture, nurse_id, nurse_name, 'cover_picture')
@@ -55,9 +56,10 @@ def add_nurse():
                 caregiver_gender=gender,
                 caregiver_email=email,
                 caregiver_department=department,
+                skills=skills,
                 experience=experience,
-                profile_photo=path1,
-                qualification_photo=path2
+                profile_photo='/' + path1,
+                qualification_photo='/' + path2
             )
             db.session.add(caregiver)
             db.session.commit()
