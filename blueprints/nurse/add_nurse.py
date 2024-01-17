@@ -48,7 +48,7 @@ def add_nurse():
             caregiver = Caregiver(
                 caregiver_id=nurse_id,
                 caregiver_name=nurse_name,
-                caregiver_age=age,
+                caregiver_age=int(age),
                 caregiver_phone=telephone,
                 caregiver_address=address,
                 hired_date=datetime.datetime.now().date(),
