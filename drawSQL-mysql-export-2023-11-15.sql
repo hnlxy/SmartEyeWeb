@@ -99,7 +99,7 @@ CREATE TABLE `elder_health`(
 );
 CREATE TABLE `caregiver_tasks`(
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `caregiver_id` VARCHAR(255) NOT NULL,
+    `caregiver_id` VARCHAR(30) NOT NULL,
     `caregiver_name` VARCHAR(255) NOT NULL,
     `task` VARCHAR(255) NOT NULL,
     `task_date` VARCHAR(50) NOT NULL,

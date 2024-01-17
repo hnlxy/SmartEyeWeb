@@ -161,7 +161,7 @@
                     if (response.success) {
                         alert('添加成功');
                         closeAddModify();
-                        updateTasks(name);
+                        updateTasks(id + '-' + name);
                     } else alert(response.message);
                 },
                 error: function () {

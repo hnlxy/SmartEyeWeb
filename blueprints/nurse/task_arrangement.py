@@ -45,13 +45,11 @@ def get_tasks():
     data = request.get_json()
     id = data['id']
     name = data['name']
-    tasks = [
-        {'name': '任务1', 'date': '2024-01-21 08:03-08:10', 'status': '未完成'},
-        {'name': '任务2', 'date': '2024-01-22 10:20-12:00', 'status': '未完成'},
-        {'name': '任务3', 'date': '2024-01-28 15:00-17:00', 'status': '已完成'},
-        {'name': '任务4', 'date': '2024-01-21 08:20-08:40', 'status': '已完成'}
-    ]
-
+    tasks = []
+    info = CaregiverTasks.query.filter(CaregiverTasks.caregiver_name == name, CaregiverTasks.caregiver_id == id).all()
+    for i in info:
+        item = {'name': i.task, 'date': i.task_date, 'status': i.task_status}
+        tasks.append(item)
     return jsonify({'success': True, 'message': '获取成功', 'tasks': tasks}), 200, {'ContentType': 'application/json'}
 
 
@@ -63,7 +61,8 @@ def add_task():
     name = data['name']
     task = data['task']
     date = data['date']
-    res = CaregiverTasks.query.filter(CaregiverTasks.task_date >= date).all()
+    today = datetime.now().date()
+    res = CaregiverTasks.query.filter(CaregiverTasks.task_date >= today).all()
     for i in res:
         if is_overlap(date, i.task_date):
             return jsonify({'success': False, 'message': '时间段有交叉'}), 200, {'ContentType': 'application/json'}
@@ -87,4 +86,8 @@ def delete_task():
     name = data['name']
     task = data['task']
     date = data['date']
+    res = CaregiverTasks.query.filter(CaregiverTasks.caregiver_id == id, CaregiverTasks.caregiver_name == name,
+                                      CaregiverTasks.task == task, CaregiverTasks.task_date == date).first()
+    db.session.delete(res)
+    db.session.commit()
     return jsonify({'success': True, 'message': '删除成功'}), 200, {'ContentType': 'application/json'}

@@ -60,6 +60,10 @@
         const selectedIds = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.getAttribute('id'));
+        if (selectedIds.length === 0) {
+            alert("请选择要删除的护工");
+            return;
+        }
         document.getElementById("delete").innerText = selectedIds.join(", ");
         document.getElementById("deleteModal").style.display = "block";
     }
@@ -70,7 +74,7 @@
 
     function delete_nurse() {
         let ids = document.getElementById("delete").innerText.split(", ");
-        let id = ids.map(element => element.trim().split('--')[0]);
+        let id = ids.map(element => element.trim());
         $.ajax({
             url: '/nurse-management/delete_nurse',
             type: 'POST',
@@ -114,7 +118,7 @@
                         {% for result in results%}
                         <tr>
                             <td>
-                                <input type="checkbox" class="checkItem" id="{{ result[0] +'--'+ result[1] }}">
+                                <input type="checkbox" class="checkItem" id="{{ result[0] +'-'+ result[1] }}">
                             </td>
                             <td>{{ result[0] }}</td>
                             <td>{{ result[1] }}</td>
