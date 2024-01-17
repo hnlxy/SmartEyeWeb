@@ -58,8 +58,8 @@ def add_nurse():
                 caregiver_department=department,
                 skills=skills,
                 experience=experience,
-                profile_photo='/' + path1,
-                qualification_photo='/' + path2
+                profile_photo='\\' + path1,
+                qualification_photo='\\' + path2
             )
             db.session.add(caregiver)
             db.session.commit()

@@ -22,9 +22,9 @@ def execute_sql_file(file_path, connection):
 
 # MySQL数据库连接配置
 db_config = {
-    'host': '127.0.0.1',
+    'host': '39.107.225.242',
     'user': 'root',
-    'password': 'root',
+    'password': 'smarteye',
     'database': 'smart_eye',
     'charset': 'utf8mb4'
 }

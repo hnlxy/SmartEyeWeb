@@ -1,12 +1,12 @@
 class BaseConfig(object):
     # MySQL数据库服务器的主机名
-    HOSTNAME = "127.0.0.1"
+    HOSTNAME = "39.107.225.242"
     # MySQL数据库服务器的端口号，默认为 3306
     PORT = 3306
     # 用于连接MySQL数据库的用户名
     USERNAME = "root"
     # 用于连接MySQL数据库的密码
-    PASSWORD = "root"
+    PASSWORD = "smarteye"
     # 要连接的数据库名
     DATABASE = "smart_eye"
     # 构造MySQL数据库连接 URL
