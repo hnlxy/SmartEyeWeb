@@ -91,7 +91,6 @@ class Elder(db.Model):
     elder_id = Column('elder_id', String, primary_key=True)
     elder_name = Column('elder_name', String)
     elder_gender = Column('elder_gender', Enum('男', '女'), nullable=False)
-    elder_phone = Column('elder_phone', String(11), nullable=False)
     elder_address = Column('elder_address', String)
     elder_birth = Column('elder_birth', DateTime)
     assigned_caregiver = Column('assign_caregiver', String)

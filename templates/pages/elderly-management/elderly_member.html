@@ -91,12 +91,6 @@
 .filter-container button:hover {
   background-color: #0056b3; /* 悬停时背景色变深 */
 }
-
-
-
-
-
-
 </style>
 
 <div class="content-wrapper">
@@ -117,74 +111,77 @@
       </span>
       <span class="filter-item">
           <button onclick="filterTable()">搜索</button>
-      </span>
+    </span>
   </div>
   
     <div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-          
-        <table class="table">
-          <thead>
+      <div class="card-body">
+          <div class="table-responsive">
+            
+          <table class="table">
+            <thead>
 
-            <tr>
-              <th>
-                <input type="checkbox" id="checkAll"> <!-- 添加全选勾选框 -->
-              </th>
-              <th>ID</th>
-              <th>长者姓名</th>
-              <th>入住日期</th>
-              <th>所在地区</th>
-              <th>护理级别</th>
-              <th>健康状况</th>
-              <th>护工</th>
-              <th>房间号</th>
-            </tr>
-          </thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="checkAll"> <!-- 添加全选勾选框 -->
+                </th>
+                <th>ID</th>
+                <th>长者姓名</th>
+                <th>性别</th>
+                <th>家庭地址</th>
+                <th>年龄</th>
+                <th>护工编号</th>
+                <th>护理级别</th>
+                <th>房间号</th>
+              </tr>
+            </thead>
           <tbody>
-              {% for result in  results%}
-              <tr><!--保证每条记录换行-->
-                <td>
-                  <input type="checkbox" class="checkItem"> <!-- 在每行添加勾选框 -->
-                </td>
-              <td>{{ result[0] }}</td>
-              <td>{{ result[1] }}</td>
-              <td>{{ result[2] }}</td>
-              <td>{{ result[3] }}</td>
-              <td>{{ result[4] }}</td>
-              <td style="color: {% if result[5] == '健康' %}green{% elif result[5] == '恢复' %}skyblue{% elif result[5] == '病危' %}Tomato{% endif %};">
-                {{ result[5] }}
-                </td>
-              <td>{{ result[6] }}</td>
-              <td>{{ result[7] }}</td>
-            </tr>
-              {% endfor %}
-
-          </tbody>
-        </table>
-        </div>
+                {% for result in  results%}
+                <tr><!--保证每条记录换行-->
+                  <td>
+                    <input type="checkbox" class="checkItem"> <!-- 在每行添加勾选框 -->
+                  </td>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+                <td>{{ result[3] }}</td>
+                <td>{{ result[4] }}</td>
+                <td>{{ result[5] }}</td>
+                <td>{{ result[6] }}</td>
+                <td>{{ result[7] }}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+          </div>
     </div>
     </div>
-    <!-- 分页控件的 HTML 结构 -->
+    <!--分页部分-->
     <div class="pagination-container">
-<nav aria-label="Page navigation">
-  <ul class="pagination justify-content-end">
-    <li class="page-item">
-      <a class="page-link" href="#">上一页</a>
-    </li>
-
-    <!-- 示例页数 -->
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <!-- ... -->
-
-    <li class="page-item">
-      <a class="page-link" href="#">下一页</a>
-    </li>
-  </ul>
-</nav>
-</div>
+      <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-end">
+              {% if page > 1 %}
+                <li class="page-item">
+                  <a class="page-link" href="{{ url_for ('elderly.elderly_member', page=page-1) }}">上一页</a>
+                </li>
+              {% endif %}
+              {% for p in range(1, total + 1) %}
+              {% if p == page %}
+              <li class="page-item active"><a class="page-link">{{ p }}</a></li>
+              {% else %}
+              <li class="page-item"><a class="page-link" href="{{ url_for ('elderly.elderly_member', page=p) }}">{{ p
+                      }}</a></li>
+              {% endif %}
+              {% endfor %}
+                  {% if page < total %}
+                  <li class="page-item"> 
+                  <a class="page-link"
+                      href="{{ url_for ('elderly.elderly_member', page=page+1) }}">下一页</a>
+                    </li>
+                {% endif %}
+          </ul>
+      </nav>
+    </div>
 </div>
 <script src="{{ url_for('static', filename='assets/js/TableCheckboxController.js') }}"></script>
 <script>
