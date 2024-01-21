@@ -27,9 +27,8 @@
 .filter-container {
   width: 100%;
   display: flex; /* 使用 Flexbox 布局 */
-  justify-content: flex-end; /* 使元素靠右对齐 */
   align-items: center; /* 垂直居中对齐 */
-  margin-bottom: 10px; /* 在筛选框和表格之间添加一些间隔 */
+  margin-top: 10px;
 }
 
 .filter-item {
@@ -95,96 +94,103 @@
 
 <div class="content-wrapper">
     <div style="font-size: 25px; margin-bottom: 15px">长者中心</div>
-    <div class="filter-container">
-      <span class="filter-item">
-          <select id="column-select">
-              <option value="name">长者姓名</option>
-              <option value="date">入住日期</option>
-              <option value="worker">分配护工</option>
-              <option value="level">护理级别</option>
-              <option value="health">健康状况</option>
-              <option value="room">房间号</option>
-          </select>
-      </span>
-      <span class="filter-item">
-          <input type="text" id="search-input" placeholder="输入搜索内容...">
-      </span>
-      <span class="filter-item">
-          <button onclick="filterTable()">搜索</button>
-    </span>
-  </div>
   
     <div class="card">
+
+      <div class="filter-container">
+        <span class="filter-item">
+            <select id="column-select">
+                <option value="id">ID</option>
+                <option value="name">长者姓名</option>
+                <option value="gender">性别</option>
+                <option value="address">家庭地址</option>
+                <option value="age">年龄</option>
+                <option value="nurse_member">护工编号</option>
+                <option value="care_level">护理级别</option>
+                <option value="room">房间号</option>
+            </select>
+        </span>
+        <span class="filter-item">
+            <input type="text" id="search-input" placeholder="输入搜索内容...">
+        </span>
+        <span class="filter-item">
+            <button onclick="filterTable()">搜索</button>
+      </span>
+     </div>
+
       <div class="card-body">
           <div class="table-responsive">
-            
-          <table class="table">
-            <thead>
-
-              <tr>
-                <th>
-                  <input type="checkbox" id="checkAll"> <!-- 添加全选勾选框 -->
-                </th>
-                <th>ID</th>
-                <th>长者姓名</th>
-                <th>性别</th>
-                <th>家庭地址</th>
-                <th>年龄</th>
-                <th>护工编号</th>
-                <th>护理级别</th>
-                <th>房间号</th>
-              </tr>
-            </thead>
-          <tbody>
-                {% for result in  results%}
-                <tr><!--保证每条记录换行-->
-                  <td>
-                    <input type="checkbox" class="checkItem"> <!-- 在每行添加勾选框 -->
-                  </td>
-                <td>{{ result[0] }}</td>
-                <td>{{ result[1] }}</td>
-                <td>{{ result[2] }}</td>
-                <td>{{ result[3] }}</td>
-                <td>{{ result[4] }}</td>
-                <td>{{ result[5] }}</td>
-                <td>{{ result[6] }}</td>
-                <td>{{ result[7] }}</td>
-              </tr>
-                {% endfor %}
-            </tbody>
-          </table>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="checkAll"> <!-- 添加全选勾选框 -->
+                  </th>
+                  <th>ID</th>
+                  <th>长者姓名</th>
+                  <th>性别</th>
+                  <th>家庭地址</th>
+                  <th>年龄</th>
+                  <th>护工编号</th>
+                  <th>护理级别</th>
+                  <th>房间号</th>
+                </tr>
+              </thead>
+            <tbody>
+                  {% for result in  results%}
+                  <tr><!--保证每条记录换行-->
+                    <td>
+                      <input type="checkbox" class="checkItem"> <!-- 在每行添加勾选框 -->
+                    </td>
+                  <td name='id'>{{ result[0] }}</td>
+                  <td name='name'>{{ result[1] }}</td>
+                  <td name='gender'>{{ result[2] }}</td>
+                  <td name='address'>{{ result[3] }}</td>
+                  <td name='age'>{{ result[4] }}</td>
+                  <td name='nurse_member'>{{ result[5] }}</td>
+                  <td name='care_level'>{{ result[6] }}</td>
+                  <td name='room'>{{ result[7] }}</td>
+                </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
           </div>
-    </div>
-    </div>
-    <!--分页部分-->
-    <div class="pagination-container">
-      <nav aria-label="Page navigation">
-          <ul class="pagination justify-content-end">
-              {% if page > 1 %}
-                <li class="page-item">
-                  <a class="page-link" href="{{ url_for ('elderly.elderly_member', page=page-1) }}">上一页</a>
-                </li>
-              {% endif %}
-              {% for p in range(1, total + 1) %}
-              {% if p == page %}
-              <li class="page-item active"><a class="page-link">{{ p }}</a></li>
-              {% else %}
-              <li class="page-item"><a class="page-link" href="{{ url_for ('elderly.elderly_member', page=p) }}">{{ p
-                      }}</a></li>
-              {% endif %}
-              {% endfor %}
-                  {% if page < total %}
-                  <li class="page-item"> 
-                  <a class="page-link"
-                      href="{{ url_for ('elderly.elderly_member', page=page+1) }}">下一页</a>
-                    </li>
-                {% endif %}
-          </ul>
-      </nav>
+      </div>
+        <!--分页部分-->
+        <div class="pagination-container">
+          <nav aria-label="Page navigation">
+              <ul class="pagination justify-content-end">
+                  {% if page > 1 %}
+                      <li class="page-item">
+                          <a class="page-link" onclick="changePage('previous')">上一页</a>
+                      </li>
+                  {% endif %}
+      
+                  {% for p in range(1, total_pages + 1) %}
+                      {% if p == page %}
+                          <li class="page-item active"><a class="page-link">{{ p }}</a></li>
+                      {% else %}
+                          <li class="page-item">
+                              <a class="page-link" onclick="changePage({{ p }})">{{ p }}</a>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+      
+                  {% if page < total_pages %}
+                      <li class="page-item">
+                          <a class="page-link" onclick="changePage('next')">下一页</a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </nav>
+      </div>
     </div>
 </div>
 <script src="{{ url_for('static', filename='assets/js/TableCheckboxController.js') }}"></script>
 <script>
+
+
+
   function filterTable() {
     // 获取下拉菜单和搜索框的值
     var columnSelect = document.getElementById("column-select");
@@ -207,6 +213,25 @@
             }
         }
     }
+}
+function changePage(page) {
+        switch (page) {
+            case 'previous':
+                page = page - 1;
+                toUrl('nurse_member', page);
+                break;
+            case 'next':
+                page = page + 1;
+                toUrl('nurse_member', page);
+                break;
+            default:
+                toUrl('nurse_member', page);
+                break;
+        }
+  }
+  function toUrl(url, page) {
+    const urlWithPage = `${url}?page=${page}`;
+    window.location.href = urlWithPage;
 }
 
   </script>

@@ -18,4 +18,4 @@ def elderly_member():
                 i.care_level, i.room_number]
         results.append(temp)
     total = len(info) // 12 + 1
-    return render_template('pages/elderly-management/elderly_member.html', results=results, page=page, total=total)
+    return render_template('pages/elderly-management/elderly_member.html', results=results, page=page, total_pages=total)
