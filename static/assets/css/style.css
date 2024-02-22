@@ -20878,6 +20878,7 @@ dl li {
   font-size: 1.125rem;
   line-height: 1;
   margin-left: auto;
+  margin-right: 1.7rem;
   color: #bba8bff5;
 }
 
@@ -20930,7 +20931,16 @@ dl li {
   margin-right: auto;
   margin-left: 1rem;
 }
-
+/*箭头不存在 使用透明箭头占位*/
+.sidebar .nav .nav-item .nav-link:not(:has(i.menu-arrow))::after {
+  content: "";
+  font-size: 1.125rem;
+  margin-left: auto;
+  display: block;
+  width: 1.125rem;
+  height: 1.125rem;
+  visibility: hidden;
+}
 .sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow:before {
   content: "\f140";
 }
@@ -21018,17 +21028,26 @@ dl li {
 }
 
 .sidebar .nav.sub-menu .nav-item {
-  padding: 0;
+  /*padding: 0;*/
+  display: flex;
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link {
-  color: #888;
-  padding: 0.75rem 2rem 0.75rem 2rem;
+  /*color: #888;*/
+  /*padding: 0.75rem 2rem 0.75rem 2rem;*/
+  /*position: relative;*/
+  /*font-size: 0.8125rem;*/
+  /*line-height: 1;*/
+  /*height: auto;*/
+  /*border-top: 0;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 2rem;
   position: relative;
-  font-size: 0.8125rem;
-  line-height: 1;
-  height: auto;
-  border-top: 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link:before {
